@@ -1,10 +1,8 @@
-import requests
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
-def web_get(url, resp_type='html'):
-    if resp_type == 'html':
-        data = requests.get(url).html()
-    elif resp_type == 'json':
-        data = requests.get(url).json()
-    else:
-        return False
-    return data
+def web_get(url):
+    html = urlopen(url)
+    soup = BeautifulSoup(html, 'html.parser')
+
+    return soup

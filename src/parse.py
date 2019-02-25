@@ -4,5 +4,7 @@ from src.lib.web_api import web_get
 
 def parse_html(url):
     html = web_get(url)
+    print(html)
+    print(type(html))
 
     # TODO: implement this

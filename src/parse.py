@@ -7,7 +7,7 @@ def parse_html(cooking_url):
 	'''
 	Takes a cooking url (assumed to be allrecipes) and extracts the relevant
 	information: cuisines, ingredients, steps, etc.
-	
+
 	It returns an object with the information about the recipe.
 	'''
 	html = web_get(cooking_url)
@@ -35,7 +35,7 @@ def parse_html(cooking_url):
 			steps.append(step_text)
 
 	title = soup.select('h1.recipe-summary__h1')[0].text.strip().lower()
-	
+
 	return {
 		"title": title,
 		"recipe_categories": cuisines,
@@ -46,5 +46,6 @@ def parse_html(cooking_url):
 def parse_ingredients(ingredients):
 	'''
 	Takes a list of ingredients
+	And splits it into categories
 	'''
 	return False

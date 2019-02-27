@@ -53,3 +53,47 @@ def parse_ingredients(ingredients):
 	And splits it into categories
 	'''
 	return False
+
+def parse_quantities(ingredients):
+	'''
+	Takes a list of ingredients
+	And takes out the quantities
+	'''
+	ingredients_lst = ingredients['ingredients']
+
+	new_lst = []
+	quantities_kw = set([line.strip() for line in open('./src/lib/categories/quantities.txt')])
+	for ingredient in ingredients_lst:
+		ingredient = ingredient.split(" ")
+		i = 0
+		quantity = []
+		while ingredient[i].isdigit() or "/" in ingredient[i]:
+			quantity.append(ingredient[i])
+			i += 1
+		measurement = [x for x in ingredient if x in quantities_kw]
+
+		# Convert quantity from string to number
+		number = 0
+		for num in quantity:
+			if "/" in num:
+				# Fraction to float
+				n,d = num.split('/')
+				num = (float(n)/float(d))
+			else:
+				num = int(num)
+			number += num
+
+		ingredient = [x for x in ingredient if x not in quantity and x not in measurement]
+		if ingredient[-1] == ',': ingredient[-1] == ""
+
+		new_lst.append(
+			{
+				"ingredient": " ".join(ingredient),
+				"quantity": number,
+				"measurement": " ".join(measurement)
+			}
+		)
+
+	ingredients['ingredients'] = new_lst
+
+	return ingredients

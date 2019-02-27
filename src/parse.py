@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from src.lib.web_api import web_get
-### import statements above here
+# import statements above here
 
 
 def parse_html(cooking_url):
@@ -10,7 +10,10 @@ def parse_html(cooking_url):
 
 	It returns an object with the information about the recipe.
 	'''
-	html = web_get(cooking_url)
+	try:
+		html = web_get(cooking_url)
+	except:
+		return {}
 	soup = BeautifulSoup(html, 'html.parser')
 
 	cuisine_html = soup.select('meta[itemprop="recipeCategory"]')
@@ -42,6 +45,7 @@ def parse_html(cooking_url):
 		"ingredients": ingredients,
 		"steps": steps
 	}
+
 
 def parse_ingredients(ingredients):
 	'''

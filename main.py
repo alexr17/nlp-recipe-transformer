@@ -3,7 +3,7 @@ import json
 # import statements above here
 
 def run():
-    recipe_num = 26435 # any number greater than or equal to 6664
+    recipe_num = 11311 # any number greater than or equal to 6664
     raw_recipe = parse_html(f'https://www.allrecipes.com/recipe/{str(recipe_num)}')
     if raw_recipe:
         print(json.dumps(parse_ingredients(raw_recipe['ingredients']), indent=4))

@@ -5,3 +5,16 @@ cubed
 minced
 quartered
 sifted
+chilled
+thawed
+drained
+frozen
+marinated
+shredded
+roasted
+ground
+cooked
+mashed
+melted
+cooled
+softened

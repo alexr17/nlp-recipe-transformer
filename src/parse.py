@@ -84,19 +84,26 @@ def parse_ingredients(ingredients):
 		# default quantity to 1
 		# if not number:
 		# 	number = 1
-		method = [x for x in ingredient if x in method_kw]
+		methods = [x for x in ingredient if x in method_kw]
 
-		stopwords = set(method) | set(measurement) | set(quantity)
+		stopwords = set(methods) | set(measurement) | set(quantity)
 
 		# ingredient
-		ingredient = [x for x in ingredient if valid_tkn(x, stopwords, set())]
+		ingredient = " ".join([x for x in ingredient if valid_tkn(x, stopwords, set())])
+		
+		# any word that we don't want at the beginning/end of the ingredient due to parsing
+		strip_words = {'and'}
+		if ingredient[-3:] in strip_words:
+			ingredient = ingredient[:-4]
+		elif ingredient[:3] in strip_words:
+			ingredient = ingredient[4:]
 
 		new_lst.append(
 			{	
 				"quantity": number,
 				"measurement": " ".join(measurement),
-				"ingredient": " ".join(ingredient),
-				"method": " ".join(method)
+				"ingredient": ingredient,
+				"methods": methods
 			}
 		)
 

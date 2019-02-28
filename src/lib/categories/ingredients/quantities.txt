@@ -36,6 +36,7 @@ pound
 pounds
 lb
 ounce
+ounces
 oz
 milligram
 milligramme

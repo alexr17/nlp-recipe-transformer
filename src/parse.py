@@ -54,20 +54,12 @@ def parse_ingredients(ingredients):
 	Takes a list of ingredients
 	And splits it into categories
 	'''
-	return False
-
-def parse_quantities(ingredients):
-	'''
-	Takes a list of ingredients
-	And takes out the quantities
-	'''
-	ingredients_lst = ingredients['ingredients']
 
 	new_lst = []
 	quantities_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
 	method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
 	
-	for ingredient in ingredients_lst:
+	for ingredient in ingredients:
 		ingredient = nltk.word_tokenize(ingredient)
 		
 		# measurement
@@ -100,14 +92,12 @@ def parse_quantities(ingredients):
 		ingredient = [x for x in ingredient if valid_tkn(x, stopwords, set())]
 
 		new_lst.append(
-			{
-				"ingredient": " ".join(ingredient),
+			{	
 				"quantity": number,
 				"measurement": " ".join(measurement),
+				"ingredient": " ".join(ingredient),
 				"method": " ".join(method)
 			}
 		)
 
-	ingredients['ingredients'] = new_lst
-
-	return ingredients
+	return new_lst

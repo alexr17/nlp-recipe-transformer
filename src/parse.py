@@ -59,8 +59,8 @@ def parse_ingredients(ingredients):
 	quantities_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
 	method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
 	
-	for ingredient in ingredients:
-		ingredient = nltk.word_tokenize(ingredient)
+	for raw_ingredient in ingredients:
+		ingredient = nltk.word_tokenize(raw_ingredient)
 		
 		# measurement
 		i = 0
@@ -103,7 +103,8 @@ def parse_ingredients(ingredients):
 				"quantity": number,
 				"measurement": " ".join(measurement),
 				"ingredient": ingredient,
-				"methods": methods
+				"methods": methods,
+				"raw_ingredient": raw_ingredient
 			}
 		)
 

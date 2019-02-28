@@ -18,3 +18,5 @@ mashed
 melted
 cooled
 softened
+divided
+flaked

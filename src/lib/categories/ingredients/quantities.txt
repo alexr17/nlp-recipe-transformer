@@ -53,3 +53,5 @@ centimetre
 meter
 metre
 inch
+can
+cans

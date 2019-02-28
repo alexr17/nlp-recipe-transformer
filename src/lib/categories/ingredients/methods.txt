@@ -1,0 +1,6 @@
+sliced
+diced
+chopped
+cubed
+minced
+quartered

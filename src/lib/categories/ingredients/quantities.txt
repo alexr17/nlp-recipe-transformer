@@ -52,9 +52,3 @@ centimetre
 meter
 metre
 inch
-sliced
-diced
-chopped
-cubed
-minced
-quartered

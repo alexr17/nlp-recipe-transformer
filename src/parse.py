@@ -1,4 +1,6 @@
+import nltk
 from bs4 import BeautifulSoup
+from src.lib.clean import valid_tkn
 from src.lib.web_api import web_get
 # import statements above here
 
@@ -62,9 +64,13 @@ def parse_quantities(ingredients):
 	ingredients_lst = ingredients['ingredients']
 
 	new_lst = []
-	quantities_kw = set([line.strip() for line in open('./src/lib/categories/quantities.txt')])
+	quantities_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
+	method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
+	
 	for ingredient in ingredients_lst:
-		ingredient = ingredient.split(" ")
+		ingredient = nltk.word_tokenize(ingredient)
+		
+		# measurement
 		i = 0
 		quantity = []
 		while ingredient[i].isdigit() or "/" in ingredient[i]:
@@ -83,14 +89,22 @@ def parse_quantities(ingredients):
 				num = int(num)
 			number += num
 
-		ingredient = [x for x in ingredient if x not in quantity and x not in measurement]
-		if ingredient[-1] == ',': ingredient[-1] == ""
+		# default quantity to 1
+		# if not number:
+		# 	number = 1
+		method = [x for x in ingredient if x in method_kw]
+
+		stopwords = set(method) | set(measurement) | set(quantity)
+
+		# ingredient
+		ingredient = [x for x in ingredient if valid_tkn(x, stopwords, set())]
 
 		new_lst.append(
 			{
 				"ingredient": " ".join(ingredient),
 				"quantity": number,
-				"measurement": " ".join(measurement)
+				"measurement": " ".join(measurement),
+				"method": " ".join(method)
 			}
 		)
 

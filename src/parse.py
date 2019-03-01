@@ -2,6 +2,7 @@ import nltk
 from bs4 import BeautifulSoup
 from src.lib.clean import valid_tkn
 from src.lib.web_api import web_get
+from src.lib.helpers import levenshtein
 # import statements above here
 
 
@@ -110,40 +111,73 @@ def parse_ingredients(ingredients):
 
 	return new_lst
 
+fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
+herbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/herbs.txt')])
+vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/vegetables.txt')])
+condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
+carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
+binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
 
-def categorize_ingredients(ingredients):
-	'''
-	Takes a list of ingredients
-	And splits it into food categories
-	'''
+food_groups = {
+	"fruit": fruits_kw,
+	"herb": herbs_kw,
+	"vegetable": vegetables_kw,
+	"condiment": condiments_kw,
+	"carb": carbs_kw,
+	"binder": binders_kw
+}
+def kw_in_food_group_set(ingredient):
+	if ingredient in fruits_kw:
+		return "fruit"
+	elif ingredient in herbs_kw:
+		return "herb"
+	elif ingredient in vegetables_kw:
+		return "vegetable"
+	elif ingredient in condiments_kw:
+		return "condiment"
+	elif ingredient in carbs_kw:
+		return "carb"
+	elif ingredient in binders_kw:
+		return "binder"
+	else:
+		return False
 
-	# 	new_ingredients = {
-		# "Protein": "beef",
-		# "Herbs/spices/seasoning": [],
-		# "Condiments": [],
-		# "Veges": [],
-		# "Carbs": [],
-		# "Binders": [] // eggs, breadcrumbs, etc.
-	# }
-	new_lst = []
-	veges_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/vegetables.txt')])
-	condiments_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/condiments.txt')])
-	herbs_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/herbs.txt')])
-	fruits_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/fruits.txt')])
+def categorize_ingredient(ingredient):
+	food_type = kw_in_food_group_set(ingredient)
+	if food_type:
+		return food_type
+	else:
+		# split ingredient and iterate
+		sp_ing = ingredient.split(' ')
+		if len(sp_ing) > 1:
+			for tkn in sp_ing:
+				food_type = kw_in_food_group_set(tkn)
+				if food_type:
+					return food_type
 
-	categorized_ingredients = {
-		"protein": [],
-		"herbs": [],
-		"condiments": [],
-		"veges": [],
-		"carbs": [],
-		"fruits": [],
-		"binders": []
-	}
+		# now match with levenshtein
+		min_lev = float("inf")
+		food_group = ''
+		food_match = ''
+		for fg in food_groups:
+			lev_score, best_food = best_match(min_lev, food_groups[fg], ingredient)
+			if lev_score < min_lev:
+				min_lev = lev_score
+				food_group = fg
+				food_match = best_food
 
-	for ingredient in ingredients:
+		# print(f"Could not find ingredient type for: {ingredient}")
+		print(f"\nMin lev score for ingredient {ingredient} is: {str(min_lev)}")
+		print(f"Food match for ingredient {ingredient} is: {food_match}")
+		print(f"Food group identified (without threshold) as: {food_group}\n")
+		return False
 
-
-
-
-
+def best_match(min_lev, food_group, ingredient):
+	food_match = ''
+	for food in food_group:
+		lev = levenshtein(food, ingredient)
+		# print(lev)
+		if lev < min_lev:
+			min_lev = lev
+			food_match = food
+	return min_lev, food_match

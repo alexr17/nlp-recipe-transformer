@@ -52,7 +52,7 @@ def parse_html(cooking_url):
 def parse_ingredients(ingredients):
 	'''
 	Takes a list of ingredients
-	And splits it into categories
+	And splits out the quantities and method
 	'''
 
 	new_lst = []
@@ -109,3 +109,41 @@ def parse_ingredients(ingredients):
 		)
 
 	return new_lst
+
+
+def categorize_ingredients(ingredients):
+	'''
+	Takes a list of ingredients
+	And splits it into food categories
+	'''
+
+	# 	new_ingredients = {
+		# "Protein": "beef",
+		# "Herbs/spices/seasoning": [],
+		# "Condiments": [],
+		# "Veges": [],
+		# "Carbs": [],
+		# "Binders": [] // eggs, breadcrumbs, etc.
+	# }
+	new_lst = []
+	veges_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/vegetables.txt')])
+	condiments_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/condiments.txt')])
+	herbs_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/herbs.txt')])
+	fruits_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/fruits.txt')])
+
+	categorized_ingredients = {
+		"protein": [],
+		"herbs": [],
+		"condiments": [],
+		"veges": [],
+		"carbs": [],
+		"fruits": [],
+		"binders": []
+	}
+
+	for ingredient in ingredients:
+
+
+
+
+

@@ -15,3 +15,6 @@ def from_healthy(recipe):
 
 def to_cuisine(recipe, cuisine):
     return False
+
+def from_cuisine(recipe, cuisine):
+    return False

@@ -58,10 +58,10 @@ def parse_ingredients(ingredients):
 	new_lst = []
 	quantities_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
 	method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
-	
+
 	for raw_ingredient in ingredients:
 		ingredient = nltk.word_tokenize(raw_ingredient)
-		
+
 		# measurement
 		i = 0
 		quantity = []
@@ -90,7 +90,7 @@ def parse_ingredients(ingredients):
 
 		# ingredient
 		ingredient = " ".join([x for x in ingredient if valid_tkn(x, stopwords, set())])
-		
+
 		# any word that we don't want at the beginning/end of the ingredient due to parsing
 		strip_words = {'and'}
 		if ingredient[-3:] in strip_words:
@@ -99,7 +99,7 @@ def parse_ingredients(ingredients):
 			ingredient = ingredient[4:]
 
 		new_lst.append(
-			{	
+			{
 				"quantity": number,
 				"measurement": " ".join(measurement),
 				"ingredient": ingredient,

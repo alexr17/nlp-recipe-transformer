@@ -1,4 +1,5 @@
 import nltk
+import json
 from bs4 import BeautifulSoup
 from src.lib.clean import valid_tkn
 from src.lib.web_api import web_get
@@ -128,7 +129,9 @@ vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_gr
 condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
 carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
 binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
-protein_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/protein.txt')])
+protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
+primary_protein_kw = set(protein_json['primary'].keys())
+secondary_protein_kw = set(protein_json['secondary'].keys())
 
 food_groups = {
     "fruit": fruits_kw,
@@ -137,25 +140,14 @@ food_groups = {
     "condiment": condiments_kw,
     "carb": carbs_kw,
     "binder": binders_kw,
-    "protein": protein_kw
+    "primary_protein": primary_protein_kw,
+    "secondary_protein": secondary_protein_kw
 }
 def kw_in_food_group_set(ingredient):
-    if ingredient in fruits_kw:
-        return "fruit"
-    elif ingredient in herbs_kw:
-        return "herb"
-    elif ingredient in vegetables_kw:
-        return "vegetable"
-    elif ingredient in condiments_kw:
-        return "condiment"
-    elif ingredient in carbs_kw:
-        return "carb"
-    elif ingredient in binders_kw:
-        return "binder"
-    elif ingredient in protein_kw:
-        return "protein"
-    else:
-        return False
+    for fg in food_groups:
+        if ingredient in food_groups[fg]:
+            return fg
+    return False
 
 def split_ingredients(ingredients):
     food_split = {
@@ -165,7 +157,8 @@ def split_ingredients(ingredients):
         "condiment": [],
         "carb": [],
         "binder": [],
-        "protein": []
+        "primary_protein": [],
+        "secondary_protein": []
     }
     for ingredient in ingredients:
         item = ingredient['ingredient']
@@ -196,8 +189,6 @@ def split_ingredients(ingredients):
                 food_split[food_group].append(ingredient)
 
     return food_split
-
-
 
 def best_match(min_lev, food_group, ingredient):
     food_match = ''

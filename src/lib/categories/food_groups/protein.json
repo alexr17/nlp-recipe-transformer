@@ -1,0 +1,40 @@
+{
+    "primary": {
+        "beef": "meat",
+        "pork": "meat",
+        "chicken": "meat",
+        "chicken breast": "meat",
+        "turkey": "meat",
+        "eggs": "vegetarian",
+        "salmon": "meat",
+        "halibut": "meat",
+        "seitan": "vegetarian",
+        "tofu": "vegetarian",
+        "mahi mahi": "meat",
+        "octupus": "meat",
+        "tilapia": "meat",
+        "anchovies": "meat",
+        "steak": "meat",
+        "ground beef": "meat",
+        "pork chops": "meat",
+        "turkey breast": "meat",
+        "chorizo": "meat",
+        "pepperoni": "meat",
+        "shrimp": "meat",
+        "lobster": "meat",
+        "ham": "meat",
+        "tuna": "meat"
+    },
+    "secondary": {
+        "cheese": "vegetarian",
+        "yogurt": "vegetarian",
+        "beans": "vegetarian",
+        "almonds": "vegetarian",
+        "edamame": "vegetarian",
+        "pumpkin seeds": "vegetarian",
+        "lentils": "vegetarian",
+        "quinoa": "vegetarian",
+        "peanut butter": "vegetarian",
+        "peanuts": "vegetarian"
+    }
+}

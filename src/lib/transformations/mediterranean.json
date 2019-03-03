@@ -1,0 +1,41 @@
+{
+    "binders": [],
+    "carbs": [
+        "pita"
+    ],
+    "condiments": [
+        "hummus",
+        "tzatziki",
+        "tahini"
+    ],
+    "fruits": [
+        "figs",
+        "grapes"
+    ],
+    "herbs": [
+        "cumin",
+        "cardamom",
+        "cinnamon",
+        "turmeric",
+        "saffron",
+        "paprika"
+    ],
+    "protein": {
+        "vegetarian": [
+            "greek yogurt",
+            "falafel",
+            "lentils"
+        ],
+        "meat": [
+            "lamb"
+        ]
+    },
+    "vegetables": [
+        "olives",
+        "garbanzo beans",
+        "tomatoes",
+        "cucumbers",
+        "onions",
+        "eggplants"
+    ]
+}

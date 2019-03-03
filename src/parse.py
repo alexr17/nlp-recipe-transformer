@@ -57,11 +57,12 @@ def parse_ingredients(ingredients):
     '''
 
     new_lst = []
-    quantities_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
+    measurement_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
     method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
 
     for raw_ingredient in ingredients:
         ingredient = nltk.word_tokenize(raw_ingredient)
+        print(ingredient)
 
         # measurement
         i = 0
@@ -69,7 +70,17 @@ def parse_ingredients(ingredients):
         while ingredient[i].isdigit() or "/" in ingredient[i]:
             quantity.append(ingredient[i])
             i += 1
-        measurement = [x for x in ingredient if x in quantities_kw]
+        measurement = []
+        flag = False
+        for x in ingredient:
+            if x == ')':
+                flag = False
+            if flag:
+                measurement.append(x)
+            elif x in measurement_kw:
+                measurement.append(x)
+            if x == '(':
+                flag = True
 
         # Convert quantity from string to number
         number = 0

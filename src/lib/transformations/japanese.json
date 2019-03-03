@@ -1,9 +1,46 @@
 {
-    "binders": [],
-    "carbs": [],
-    "condiments": [],
-    "fruits": [],
-    "herbs": [],
-    "protein": [],
-    "vegetables": []
+    "binders": [
+        "broth",
+        "miso",
+        "sesame oil",
+    ],
+    "carbs": [
+        "rice",
+        "soba noodles"
+    ],
+    "condiments": [
+        "soy sauce",
+        "oyster sauce",
+        "ponzu",
+        "teryaki sauce"
+    ],
+    "fruits": [
+        "asian pear"
+    ],
+    "herbs": [
+        "thyme",
+        "oregeno",
+        "sesame",
+        "ginger"
+    ],
+    "protein": {
+        "vegetarian": [
+            "tofu"
+        ],
+        "meat": [
+            "pork",
+            "chicken",
+            "salmon",
+            "tuna",
+            "yellowtail"
+        ]
+    },
+    "vegetables": [
+        "daichon",
+        "green onions",
+        "carrots",
+        "cabbage",
+        "seaweed",
+        "cucumber"
+    ]
 }

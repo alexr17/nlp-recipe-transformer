@@ -18,3 +18,4 @@ granola
 noodles
 spaghetti
 crackers
+soba

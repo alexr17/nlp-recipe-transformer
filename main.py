@@ -1,18 +1,24 @@
-from src.parse import parse_html, parse_ingredients, categorize_ingredient
+from src.parse import parse_html, parse_ingredients, categorize_ingredient, split_ingredients
 import json
 # import statements above here
 
 def run():
-    # recipe_num = 260813 # any number greater than or equal to 6664
-    for recipe_num in range(6665, 6670):
-        raw_recipe = parse_html(f'https://www.allrecipes.com/recipe/{str(recipe_num)}')
-        if raw_recipe:
-            raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
-            # print(json.dumps(raw_recipe, indent=4))
-            for ingredient_obj in raw_recipe['ingredients']:
-                ingredient_type = categorize_ingredient(ingredient_obj['ingredient'])
-                if ingredient_type:
-                    print(f"Found ingredient type {ingredient_type} for ingredient: {ingredient_obj['ingredient']}")
+    #recipe_num = 260813 # any number greater than or equal to 6664
+    raw_recipe = parse_html(f'https://www.allrecipes.com/recipe/{6665}')
+    raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
+    print(json.dumps(raw_recipe['ingredients'], indent=4))
+    print('-------------------------------------------------')
+    raw_recipe['ingredients'] = split_ingredients(raw_recipe['ingredients'])
+    print(json.dumps(raw_recipe['ingredients'], indent=4))
+    # for recipe_num in range(6665, 6670):
+    #     raw_recipe = parse_html(f'https://www.allrecipes.com/recipe/{str(recipe_num)}')
+    #     if raw_recipe:
+    #         raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
+    #         # print(json.dumps(raw_recipe, indent=4))
+    #         for ingredient_obj in raw_recipe['ingredients']:
+    #             ingredient_type = categorize_ingredient(ingredient_obj['ingredient'])
+    #             if ingredient_type:
+    #                 print(f"Found ingredient type {ingredient_type} for ingredient: {ingredient_obj['ingredient']}")
     # parsed_ingredients = parse_ingredients(raw_recipe['ingredients'])
     return False
 

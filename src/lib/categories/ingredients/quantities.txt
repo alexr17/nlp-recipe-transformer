@@ -55,3 +55,5 @@ metre
 inch
 can
 cans
+package
+packages

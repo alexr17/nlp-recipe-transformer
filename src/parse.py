@@ -157,36 +157,6 @@ def kw_in_food_group_set(ingredient):
     else:
         return False
 
-def categorize_ingredient(ingredient):
-    food_type = kw_in_food_group_set(ingredient)
-    if food_type:
-        return food_type
-    else:
-        # split ingredient and iterate
-        sp_ing = ingredient.split(' ')
-        if len(sp_ing) > 1:
-            for tkn in sp_ing:
-                food_type = kw_in_food_group_set(tkn)
-                if food_type:
-                    return food_type
-
-        # now match with levenshtein
-        min_lev = float("inf")
-        food_group = ''
-        food_match = ''
-        for fg in food_groups:
-            lev_score, best_food = best_match(min_lev, food_groups[fg], ingredient)
-            if lev_score < min_lev:
-                min_lev = lev_score
-                food_group = fg
-                food_match = best_food
-
-        # print(f"Could not find ingredient type for: {ingredient}")
-        print(f"\nMin lev score for ingredient {ingredient} is: {str(min_lev)}")
-        print(f"Food match for ingredient {ingredient} is: {food_match}")
-        print(f"Food group identified (without threshold) as: {food_group}\n")
-        return False
-
 def split_ingredients(ingredients):
     food_split = {
         "fruit": [],

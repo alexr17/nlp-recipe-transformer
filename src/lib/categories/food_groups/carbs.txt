@@ -14,5 +14,7 @@ croissant
 cream of wheat
 biscuit
 fries
-lasagnes
 granola
+noodles
+spaghetti
+crackers

@@ -53,12 +53,12 @@ def parse_html(cooking_url):
 def parse_ingredients(ingredients):
     '''
     Takes a list of ingredients
-    And splits out the quantities and method
+    And splits out the quantities and descriptor
     '''
 
     new_lst = []
     measurement_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/quantities.txt')])
-    method_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/methods.txt')])
+    descriptor_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/descriptors.txt')])
 
     for raw_ingredient in ingredients:
         ingredient = nltk.word_tokenize(raw_ingredient)
@@ -96,9 +96,9 @@ def parse_ingredients(ingredients):
         # default quantity to 1
         # if not number:
         # 	number = 1
-        methods = [x for x in ingredient if x in method_kw]
+        descriptors = [x for x in ingredient if x in descriptor_kw]
 
-        stopwords = set(methods) | set(measurement) | set(quantity)
+        stopwords = set(descriptors) | set(measurement) | set(quantity)
 
         # ingredient
         ingredient = " ".join([x for x in ingredient if valid_tkn(x, stopwords, set())])
@@ -115,7 +115,7 @@ def parse_ingredients(ingredients):
                 "quantity": number,
                 "measurement": " ".join(measurement),
                 "ingredient": ingredient,
-                "methods": methods,
+                "descriptors": descriptors,
                 "raw_ingredient": raw_ingredient
             }
         )

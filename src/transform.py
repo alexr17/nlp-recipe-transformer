@@ -80,14 +80,8 @@ def to_healthy(recipe):
 def from_healthy(recipe):
     return False
 
-def to_mediterranean(recipe):
-    return False
-
-def from_mediterranean(recipe):
-    return False
-
-def to_japanese(recipe):
-    return False
+def to_cuisine(recipe, cuisine):
+    recipe = format_recipe(recipe)
 
 def from_japanese(recipe):
     return False

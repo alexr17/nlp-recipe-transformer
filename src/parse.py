@@ -63,7 +63,6 @@ def parse_ingredients(ingredients):
 
     for raw_ingredient in ingredients:
         ingredient = nltk.word_tokenize(raw_ingredient)
-        print(ingredient)
 
         # measurement
         i = 0

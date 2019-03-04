@@ -74,6 +74,3 @@ def from_healthy(recipe):
 
 def to_cuisine(recipe, cuisine):
     recipe = format_recipe(recipe)
-
-def from_japanese(recipe):
-    return False

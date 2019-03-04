@@ -20,3 +20,5 @@ spaghetti
 crackers
 soba
 quinoa
+white rice
+brown rice

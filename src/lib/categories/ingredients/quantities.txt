@@ -57,3 +57,7 @@ can
 cans
 package
 packages
+clove
+cloves
+pinch
+bunch

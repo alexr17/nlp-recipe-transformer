@@ -40,4 +40,8 @@ grated
 small
 medium
 lean
-
+zested
+coarsely
+dried
+uncooked
+deveined

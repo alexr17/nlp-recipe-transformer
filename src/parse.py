@@ -8,6 +8,27 @@ from src.lib.helpers import levenshtein
 
 debug = False
 
+fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
+herbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/herbs.txt')])
+vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/vegetables.txt')])
+condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
+carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
+binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
+protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
+primary_protein_kw = set(protein_json['primary'].keys())
+secondary_protein_kw = set(protein_json['secondary'].keys())
+
+food_groups = {
+    "fruit": fruits_kw,
+    "herb": herbs_kw,
+    "vegetable": vegetables_kw,
+    "condiment": condiments_kw,
+    "carb": carbs_kw,
+    "binder": binders_kw,
+    "primary_protein": primary_protein_kw,
+    "secondary_protein": secondary_protein_kw
+}
+
 def parse_html(cooking_url):
     '''
     Takes a cooking url (assumed to be allrecipes) and extracts the relevant
@@ -50,7 +71,6 @@ def parse_html(cooking_url):
         "ingredients": ingredients,
         "steps": steps
     }
-
 
 def parse_ingredients(ingredients):
     '''
@@ -123,26 +143,6 @@ def parse_ingredients(ingredients):
 
     return new_lst
 
-fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
-herbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/herbs.txt')])
-vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/vegetables.txt')])
-condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
-carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
-binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
-protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
-primary_protein_kw = set(protein_json['primary'].keys())
-secondary_protein_kw = set(protein_json['secondary'].keys())
-
-food_groups = {
-    "fruit": fruits_kw,
-    "herb": herbs_kw,
-    "vegetable": vegetables_kw,
-    "condiment": condiments_kw,
-    "carb": carbs_kw,
-    "binder": binders_kw,
-    "primary_protein": primary_protein_kw,
-    "secondary_protein": secondary_protein_kw
-}
 def kw_in_food_group_set(ingredient):
     '''
     Checks if a string (ingredient) is in one of the ingredient text files

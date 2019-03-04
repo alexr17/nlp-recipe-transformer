@@ -36,6 +36,9 @@ def format_recipe(recipe):
     return raw_recipe
 
 def to_vegetarian(recipe):
+    '''
+    Converts a recipe to a vegetarian version
+    '''
     recipe = format_recipe(recipe)
 
     # Convert ingredients to vegetarian

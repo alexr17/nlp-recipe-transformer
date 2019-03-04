@@ -1,0 +1,27 @@
+oven
+stove
+broiler
+gas grill
+charcoal grill
+grill
+toaster
+rice cooker
+pressure cooker
+slow cooker
+fryer
+blender
+food processor
+mixer
+mandoline
+spiralizer
+pot
+pan
+baking sheet
+sheet
+skillet
+colander
+saucepan
+aluminum foil
+baking paper
+wax paper
+baking tin

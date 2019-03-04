@@ -173,7 +173,7 @@ def split_ingredients(ingredients):
                 for tkn in sp_ing:
                     food_type = kw_in_food_group_set(tkn)
                     if food_type:
-                        ingredient["matched_word"] = item
+                        ingredient["matched_word"] = tkn
                         food_split[food_type].append(ingredient)
                         flag = True
             if not flag:

@@ -28,14 +28,28 @@ def to_vegetarian(recipe):
     primary_protein = ingredients['primary_protein']
     secondary_protein = ingredients['secondary_protein']
 
+    primary_protein_dict = protein_json['primary']
+
+    vegetarian_swap = json.load(open('./src/lib/transformations/vegetarian.json'))
+
+    for protein in primary_protein:
+        matched_word = protein['matched_word']
+
+
+        if matched_word in primary_protein_dict:
+            if primary_protein_dict[matched_word] == "meat":
+                if matched_word in vegetarian_swap:
+                    protein['ingredient'] = vegetarian_swap[matched_word]
+
+    #print(json.dumps(recipe, indent=2))
+
+
+
+
 
 
 
     # Convert directions to vegetarian
-
-
-
-    print(json.dumps(recipe, indent=2))
 
 def from_vegetarian(recipe):
     return False

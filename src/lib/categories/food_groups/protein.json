@@ -1,6 +1,8 @@
 {
     "primary": {
         "beef": "meat",
+        "beef broth": "meat",
+        "beef stock": "meat",
         "pork": "meat",
         "chicken": "meat",
         "chicken breast": "meat",

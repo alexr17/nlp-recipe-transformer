@@ -1,0 +1,15 @@
+bake
+sear
+stir fry
+sautee
+broil
+fry
+scortch
+reduce
+slow cook
+cook
+boil
+simmer
+preheat
+heat
+

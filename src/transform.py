@@ -4,7 +4,20 @@ import json
 import nltk
 ### import statements above here
 
+fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
+herbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/herbs.txt')])
+vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/vegetables.txt')])
+condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
+carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
+binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
+protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
+primary_protein_kw = set(protein_json['primary'].keys())
+secondary_protein_kw = set(protein_json['secondary'].keys())
+
 def format_recipe(recipe):
+    '''
+    Takes a recipe url and runs the parsing methods, returning a parsed recipe
+    '''
     raw_recipe = parse_html(recipe)
     raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
 
@@ -21,17 +34,6 @@ def format_recipe(recipe):
     raw_recipe['steps'] = steps
 
     return raw_recipe
-
-fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
-herbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/herbs.txt')])
-vegetables_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/vegetables.txt')])
-condiments_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/condiments.txt')])
-carbs_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/carbs.txt')])
-binders_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/binders.txt')])
-protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
-primary_protein_kw = set(protein_json['primary'].keys())
-secondary_protein_kw = set(protein_json['secondary'].keys())
-
 
 def to_vegetarian(recipe):
     recipe = format_recipe(recipe)
@@ -71,17 +73,27 @@ def to_vegetarian(recipe):
 
     print(json.dumps(recipe, indent=2))
 
-def from_vegetarian(recipe):
+def to_non_vegetarian(recipe, meat_type='random'):
+    '''
+    Converts a parsed vegetarian recipe to one with meat
+    '''
     return False
 
 def to_healthy(recipe):
+    '''
+    Converts a parsed recipe to a healthier version
+    '''
     return False
 
-def from_healthy(recipe):
+def to_non_healthy(recipe):
+    '''
+    Converts a recipe into a unhealthy version
+    '''
     return False
 
 def to_cuisine(recipe, cuisine):
+    '''
+    Converts a parsed recipe to a given cuisine
+    '''
     recipe = format_recipe(recipe)
-
-def from_cuisine(recipe):
     return False

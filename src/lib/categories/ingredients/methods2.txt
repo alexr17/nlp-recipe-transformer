@@ -12,6 +12,8 @@ score
 combine
 melt
 punch down
+heat
+reduce
 pour
 skin
 skim

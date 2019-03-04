@@ -8,13 +8,19 @@ import json
 
 def run():
 
+    recipe_num = 121759
+    recipe = f'https://www.allrecipes.com/recipe/{recipe_num}'
+    print('-------------- Converting to vegetarian: -------------------')
+    to_vegetarian(recipe)
+    return False
+
     min_recipe = 6664 # any number greater than or equal to 6664
     raw_recipe = False
     while not raw_recipe or raw_recipe['title'] in {'johnsonville® three cheese italian style chicken sausage skillet pizza'}:
         recipe = f'https://www.allrecipes.com/recipe/{str(min_recipe + randint(0, 250000))}'
         raw_recipe = parse_html(recipe)
-        
-    
+
+
     print(f"Now parsing {recipe}")
     raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
     ingredients = [ingredient['ingredient'] for ingredient in raw_recipe['ingredients']]

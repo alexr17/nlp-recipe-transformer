@@ -163,6 +163,7 @@ def split_ingredients(ingredients):
         item = ingredient['ingredient']
         food_type = kw_in_food_group_set(item)
         if food_type:
+            ingredient["matched_word"] = item
             food_split[food_type].append(ingredient)
         else:
             # split ingredient and iterate
@@ -172,6 +173,7 @@ def split_ingredients(ingredients):
                 for tkn in sp_ing:
                     food_type = kw_in_food_group_set(tkn)
                     if food_type:
+                        ingredient["matched_word"] = item
                         food_split[food_type].append(ingredient)
                         flag = True
             if not flag:
@@ -185,6 +187,7 @@ def split_ingredients(ingredients):
                         min_lev = lev_score
                         food_group = fg
                         food_match = best_food
+                ingredient["matched_word"] = food_match
                 food_split[food_group].append(ingredient)
 
     return food_split

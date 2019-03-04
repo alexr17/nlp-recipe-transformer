@@ -11,6 +11,7 @@ slow cooker
 fryer
 blender
 food processor
+bowl
 mixer
 mandoline
 spiralizer

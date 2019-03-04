@@ -54,6 +54,7 @@ def parse_methods(steps):
 
 
 def split_steps(steps, ingredients, tools, methods):
+    # TODO: add 'hr', 'min', 'second', 'sec' to time pattern
     timePattern = re.compile('(\d+ hour(?:s?) (?:and )?\d+ minute(?:s?))|(\d+ minute(?:s?))|(\d+ hour(?:s?))')
     temperaturePattern = re.compile('(\d+(?:(?: [dD]egrees)|(?:\u00b0)) (?:(?:[fF]ahrenheit)|(?:[fF])|(?:[Cc]elcius)|(?:[cC])))')
 

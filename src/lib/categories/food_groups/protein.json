@@ -28,7 +28,11 @@
         "lobster": "meat",
         "ham": "meat",
         "tuna": "meat",
-        "bacon": "meat"
+        "bacon": "meat",
+        "turkey bacon": "meat",
+        "crabmeat": "meat",
+        "crab": "meat",
+        "venison": "meat"
     },
     "secondary": {
         "cheese": "vegetarian",
@@ -41,6 +45,7 @@
         "quinoa": "vegetarian",
         "peanut butter": "vegetarian",
         "peanuts": "vegetarian",
-        "pine nuts": "vegetarian"
+        "pine nuts": "vegetarian",
+        "sunflower seeds": "vegetarian"
     }
 }

@@ -105,7 +105,7 @@ def parse_ingredients(ingredients):
         ingredient = " ".join([x for x in ingredient if valid_tkn(x, stopwords, set())])
 
         # any word that we don't want at the beginning/end of the ingredient due to parsing
-        strip_words = {'and'}
+        strip_words = {'and', 'or', '&'}
         if ingredient[-3:] in strip_words:
             ingredient = ingredient[:-4]
         elif ingredient[:3] in strip_words:

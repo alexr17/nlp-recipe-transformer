@@ -1,6 +1,7 @@
 from src.parse import parse_html, parse_ingredients, split_ingredients
 from src.parse_steps import parse_tools, parse_methods, split_steps
 import json
+import nltk
 ### import statements above here
 
 def format_recipe(recipe):
@@ -61,6 +62,13 @@ def to_vegetarian(recipe):
         step_ingredients = step['ingredients']
         step['ingredients'] = [swapped_words[x] if x in swapped_words else x for x in step_ingredients]
 
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+
+
+
     print(json.dumps(recipe, indent=2))
 
 def from_vegetarian(recipe):
@@ -74,3 +82,6 @@ def from_healthy(recipe):
 
 def to_cuisine(recipe, cuisine):
     recipe = format_recipe(recipe)
+
+def from_cuisine(recipe):
+    return False

@@ -2,11 +2,11 @@ import nltk
 import json
 import re
 from src.lib.clean import valid_tkn
-from src.lib.web_api import web_get
-from src.lib.helpers import levenshtein
-
 
 def parse_tools(steps):
+    '''
+    Parses the tools from the steps in a recipe
+    '''
     tools_lst = []
     tools_kw = set([line.strip() for line in open('./src/lib/categories/ingredients/tools.txt')])
 
@@ -28,6 +28,9 @@ def parse_tools(steps):
     return list(set(tools_lst))
 
 def parse_methods(steps):
+    '''
+    Parses the methods from the steps in a recipe
+    '''
     methods = {
         "primary_methods": [],
         "secondary_methods": []
@@ -63,6 +66,9 @@ def parse_methods(steps):
 
 
 def split_steps(steps, ingredients, tools, methods):
+    '''
+    Parses the steps
+    '''
     # TODO: add 'hr', 'min', 'second', 'sec' to time pattern
     timePattern = re.compile('(\d+ hour(?:s?) (?:and )?\d+ minute(?:s?))|(\d+ minute(?:s?))|(\d+ hour(?:s?))')
     temperaturePattern = re.compile('(\d+(?:(?: [dD]egrees)|(?:\u00b0)))')
@@ -109,8 +115,3 @@ def split_steps(steps, ingredients, tools, methods):
         new_steps.append(new_step)
 
     return new_steps
-
-
-
-
-

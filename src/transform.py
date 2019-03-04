@@ -1,5 +1,3 @@
-from src.parse import parse_html, parse_ingredients, split_ingredients
-from src.parse_steps import parse_tools, parse_methods, split_steps
 import json
 import nltk
 ### import statements above here
@@ -14,32 +12,10 @@ protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
 primary_protein_kw = set(protein_json['primary'].keys())
 secondary_protein_kw = set(protein_json['secondary'].keys())
 
-def format_recipe(recipe):
-    '''
-    Takes a recipe url and runs the parsing methods, returning a parsed recipe
-    '''
-    raw_recipe = parse_html(recipe)
-    raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
-
-    ingredients = [ingredient['ingredient'] for ingredient in raw_recipe['ingredients']]
-    raw_recipe['ingredients'] = split_ingredients(raw_recipe['ingredients'])
-
-    tools = parse_tools(raw_recipe['steps'])
-    raw_recipe['tools'] = tools
-
-    methods = parse_methods(raw_recipe['steps'])
-    raw_recipe['methods'] = methods
-
-    steps = split_steps(raw_recipe['steps'], ingredients, tools, methods)
-    raw_recipe['steps'] = steps
-
-    return raw_recipe
-
 def to_vegetarian(recipe):
     '''
     Converts a recipe to a vegetarian version
     '''
-    recipe = format_recipe(recipe)
 
     # Convert ingredients to vegetarian
     ingredients = recipe['ingredients']
@@ -72,9 +48,7 @@ def to_vegetarian(recipe):
         splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
 
-
-
-    print(json.dumps(recipe, indent=2))
+    return recipe
 
 def to_non_vegetarian(recipe, meat_type='random'):
     '''
@@ -98,5 +72,4 @@ def to_cuisine(recipe, cuisine):
     '''
     Converts a parsed recipe to a given cuisine
     '''
-    recipe = format_recipe(recipe)
     return False

@@ -3,6 +3,8 @@
         "beef": "meat",
         "beef broth": "meat",
         "beef stock": "meat",
+        "chicken broth": "meat",
+        "chicken stock": "meat",
         "pork": "meat",
         "chicken": "meat",
         "chicken breast": "meat",
@@ -25,7 +27,8 @@
         "shrimp": "meat",
         "lobster": "meat",
         "ham": "meat",
-        "tuna": "meat"
+        "tuna": "meat",
+        "bacon": "meat"
     },
     "secondary": {
         "cheese": "vegetarian",
@@ -37,6 +40,7 @@
         "lentils": "vegetarian",
         "quinoa": "vegetarian",
         "peanut butter": "vegetarian",
-        "peanuts": "vegetarian"
+        "peanuts": "vegetarian",
+        "pine nuts": "vegetarian"
     }
 }

@@ -61,3 +61,5 @@ clove
 cloves
 pinch
 bunch
+slices
+slice

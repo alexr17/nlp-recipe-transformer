@@ -79,3 +79,4 @@ tangerine
 tomato
 ugli fruit
 watermelon
+bananas

@@ -48,11 +48,10 @@ def parse_html(cooking_url):
         "steps": steps
     }
 
-def format_recipe(recipe):
+def format_recipe(raw_recipe):
     '''
     Takes a recipe url and runs the parsing methods, returning a parsed recipe
     '''
-    raw_recipe = parse_html(recipe)
     raw_recipe['ingredients'] = parse_ingredients(raw_recipe['ingredients'])
 
     ingredients = [ingredient['ingredient'] for ingredient in raw_recipe['ingredients']]

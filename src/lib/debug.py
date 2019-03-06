@@ -3,16 +3,16 @@ import fileinput
 import json
 from src.parse import parse_html, format_recipe
 
-def test_random_recipe():
+def test_random_recipe(debug=True):
     min_recipe = 6664
     raw_recipe = False
     recipe = f'https://www.allrecipes.com/recipe/{str(min_recipe + randint(0, 250000))}'
     while not raw_recipe or raw_recipe['title'] in {'johnsonville® three cheese italian style chicken sausage skillet pizza'}:
         recipe = f'https://www.allrecipes.com/recipe/{str(min_recipe + randint(0, 250000))}'
         raw_recipe = parse_html(recipe)
-    print(f"Now parsing recipe: {recipe}")
-    parsed_recipe = format_recipe(recipe)
-    print(json.dumps(parsed_recipe, indent=2))
+    print(f"Now loading random recipe: {recipe}")
+    parsed_recipe = format_recipe(raw_recipe)
+    if debug: print(json.dumps(parsed_recipe, indent=2))
     return parsed_recipe
 
 def test_recipes():    

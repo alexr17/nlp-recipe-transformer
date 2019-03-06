@@ -123,3 +123,4 @@ vegetables
 lotus seed
 chipotle pepper
 capers
+olives

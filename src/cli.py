@@ -116,7 +116,6 @@ def cli_load(line):
     if len(line) < 2:
         print("You need to pass more arguments")
     elif line[1] in {'--random', '-r'}:
-        print("Recipe loaded")
         return test_random_recipe(False)
     elif len(line) < 3:
         print("You need to pass more arguments")

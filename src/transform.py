@@ -26,6 +26,7 @@ def to_vegetarian(recipe):
     primary_protein_dict = protein_json['primary']
 
     vegetarian_swap = json.load(open('./src/lib/transformations/vegetarian.json'))
+    meat_descriptors = set([line.strip() for line in open('./src/lib/transformations/meat_descriptors.txt')])
 
     swapped_words = {}
     for protein in primary_protein:
@@ -37,6 +38,19 @@ def to_vegetarian(recipe):
                 if matched_word in vegetarian_swap:
                     protein['ingredient'] = vegetarian_swap[matched_word]
                     swapped_words[matched_word] = vegetarian_swap[matched_word]
+        new_raw_ingredient = []
+        raw_ingredient = protein['raw_ingredient'].split(" ")
+        for x in protein['raw_ingredient'].split(" "):
+            print(x)
+            if x in swapped_words:
+                new_raw_ingredient.append(swapped_words[x])
+            elif x in meat_descriptors:
+                print(x)
+                new_raw_ingredient.append("")
+            else:
+                new_raw_ingredient.append(x)
+
+        protein['raw_ingredient'] = " ".join(new_raw_ingredient)
 
     # Convert directions to vegetarian
     for step in recipe['steps']:

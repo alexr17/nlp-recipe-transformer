@@ -26,6 +26,7 @@ peeled
 pitted
 unsalted
 halved
+crumbled
 juiced
 mild
 spicy

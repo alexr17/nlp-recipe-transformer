@@ -7,7 +7,7 @@ import json
 
 def run():
 
-    recipe_num = 121759
+    recipe_num = 25678
     recipe = f'https://www.allrecipes.com/recipe/{recipe_num}'
     print('-------------- Converting to vegetarian: -------------------')
     parsed_recipe = format_recipe(recipe)

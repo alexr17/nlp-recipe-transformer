@@ -49,6 +49,7 @@ kilogramme
 millimeter
 millimetre
 centimeter
+cubes
 centimetre
 meter
 metre

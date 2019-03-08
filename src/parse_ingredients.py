@@ -14,6 +14,7 @@ binders_kw = set([line.strip() for line in open('./src/lib/categories/food_group
 protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
 primary_protein_kw = set(protein_json['primary'].keys())
 secondary_protein_kw = set(protein_json['secondary'].keys())
+tertiary_protein_kw = set(protein_json['tertiary'].keys())
 
 food_groups = {
     "fruit": fruits_kw,
@@ -23,7 +24,8 @@ food_groups = {
     "carb": carbs_kw,
     "binder": binders_kw,
     "primary_protein": primary_protein_kw,
-    "secondary_protein": secondary_protein_kw
+    "secondary_protein": secondary_protein_kw,
+    "tertiary_protein": tertiary_protein_kw
 }
 
 def parse_ingredients(ingredients):
@@ -119,7 +121,8 @@ def split_ingredients(ingredients):
         "carb": [],
         "binder": [],
         "primary_protein": [],
-        "secondary_protein": []
+        "secondary_protein": [],
+        "tertiary_protein": []
     }
     for ingredient in ingredients:
         item = ingredient['ingredient']

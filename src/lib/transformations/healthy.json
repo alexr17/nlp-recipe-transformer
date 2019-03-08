@@ -6,11 +6,14 @@
     "lard": "vegetable oil",
     "butter": "vegetable oil",
     "chocolate": "dark chocolate",
+    "white chocolate":"white chocolate",
     "high fructose corn syrup": "honey",
     "corn syrup": "honey",
     "shortening": "applesauce",
     "flour": "whole wheat flour",
     "white flour": "whole wheat flour",
     "all-purpose flour": "whole wheat flour",
-    "confectioners sugar": "confectioners sugar"
+    "confectioners sugar": "confectioners sugar",
+    "white rice": "brown rice"
+    
 }

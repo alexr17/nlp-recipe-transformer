@@ -2,7 +2,7 @@
     "primary": {
         "beef": {
             "type": "meat",
-            "category": "animal"
+            "category": "meat"
         },
         "beef broth": {
             "type": "meat",
@@ -26,6 +26,18 @@
         },
         "chicken stock": {
             "type": "meat",
+            "category": "soup"
+        },
+        "vegetable stew": {
+            "type": "vegetarian",
+            "category": "soup"
+        },
+        "vegetable broth": {
+            "type": "vegetarian",
+            "category": "soup"
+        },
+        "vegetable stock": {
+            "type": "vegetarian",
             "category": "soup"
         },
         "pork": {

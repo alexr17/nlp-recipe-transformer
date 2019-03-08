@@ -162,6 +162,10 @@
             "type": "vegetarian",
             "category": "bean"
         },
+        "garbanzo beans": {
+            "type": "vegetarian",
+            "category": "bean"
+        },
         "mung beans": {
             "type": "vegetarian",
             "category": "bean"

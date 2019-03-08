@@ -114,6 +114,12 @@ def to_healthy(recipe):
             fry_time_array[0] = str(eval(fry_time_array[0])*4)
             step['times'][0]=" ".join(fry_time_array)
             swapped_words_to_healthy[orig_time]=fry_time_array[0]
+            if "fry" in recipe['methods']['primary_methods']:
+                for i in range(len(recipe['methods']['primary_methods'])):
+                    if recipe['methods']['primary_methods'][i] == "fry":
+                        print(recipe['methods']['primary_methods'][i])
+                        recipe['methods']['primary_methods'][i]="bake"
+                        print(recipe['methods']['primary_methods'][i])
             for i in range(len(step['methods'])):
                 if step['methods'][i] == "fry":
                     #print("swap")
@@ -124,7 +130,7 @@ def to_healthy(recipe):
                     #print(step['methods'])
         #print(step['methods'])
         step_ingredients_th = step['ingredients']
-        print(swapped_words_to_healthy)
+        #print(swapped_words_to_healthy)
         step['ingredients'] = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in step_ingredients_th]
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
@@ -136,7 +142,7 @@ def to_non_healthy(recipe):
     '''
     Converts a recipe into a unhealthy version
     '''
-    return False
+    
 
 def to_cuisine(recipe, cuisine):
     '''

@@ -12,7 +12,7 @@ def run():
     recipe = f'https://www.allrecipes.com/recipe/{recipe_num}'
     raw_recipe = parse_html(recipe)
     parsed_recipe = format_recipe(raw_recipe)
-    formatted_recipe = to_healthy(parsed_recipe)
+    formatted_recipe = to_non_healthy(parsed_recipe)
     print('-------------- Converting to healthy: -------------------')
     print(json.dumps(formatted_recipe, indent=2))
     return False

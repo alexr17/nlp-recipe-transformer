@@ -14,7 +14,7 @@ def run():
     parsed_recipe = format_recipe(raw_recipe)
     formatted_recipe = to_vegetarian(parsed_recipe)
     print('-------------- Converting to vegetarian: -------------------')
-    print(json.dumps(formatted_recipe, indent=2))
+    #print(json.dumps(formatted_recipe, indent=2))
     return False
 
 

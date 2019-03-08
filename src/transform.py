@@ -41,11 +41,11 @@ def to_vegetarian(recipe):
         new_raw_ingredient = []
         raw_ingredient = protein['raw_ingredient'].split(" ")
         for x in protein['raw_ingredient'].split(" "):
-            print(x)
+            #print(x)
             if x in swapped_words:
                 new_raw_ingredient.append(swapped_words[x])
             elif x in meat_descriptors:
-                print(x)
+                #print(x)
                 new_raw_ingredient.append("")
             else:
                 new_raw_ingredient.append(x)
@@ -74,7 +74,11 @@ def to_healthy(recipe):
     '''
     Converts a parsed recipe to a healthier version
     '''
-    return False
+    ingredient= recipe['ingredients']
+    swapped_words_to_healthy = {}
+    for ing in ingredient:
+
+
 
 def to_non_healthy(recipe):
     '''

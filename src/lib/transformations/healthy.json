@@ -1,3 +1,20 @@
 {
-    
+    "ingredients":{
+        "whole milk": "skim milk",
+        "heavy cream": "skim milk",
+        "milk": "skim milk",
+        "sugar": "honey",
+        "lard": "olive oil",
+        "butter": "olive oil",
+        "chocolate": "dark chocolate",
+        "high fructose corn syrup": "honey",
+        "corn syrup": "honey",
+        "shortening": "applesauce",
+        "flour": "whole wheat flour",
+        "white flour": "whole wheat flour",
+        "all-purpose flour": "whole wheat flour"
+    },
+    "steps":{
+        "fry": "bake"
+    }
 }

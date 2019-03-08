@@ -74,11 +74,63 @@ def to_healthy(recipe):
     '''
     Converts a parsed recipe to a healthier version
     '''
-    ingredient= recipe['ingredients']
+    to_healthy_swap = json.load(open('./src/lib/transformations/healthy.json'))
     swapped_words_to_healthy = {}
-    for ing in ingredient:
+    #swapping ingredients
+    ingredient = recipe['ingredients']
 
-
+    binder = ingredient['binder']
+    carb = ingredient['carb']
+    condiment = ingredient['condiment']
+    for ing in binder:
+        matched_word_to_healthy = ing['matched_word']
+        if matched_word_to_healthy in to_healthy_swap:
+            if ing['ingredient']=='butter':
+                ing['ingredient']=to_healthy_swap[matched_word_to_healthy]
+                ing['quantity']=ing['quantity']*(.75)
+                swapped_words_to_healthy[matched_word_to_healthy]=to_healthy_swap[matched_word_to_healthy]
+            else:
+                ing['ingredient']=to_healthy_swap[matched_word_to_healthy]
+                swapped_words_to_healthy[matched_word_to_healthy]=to_healthy_swap[matched_word_to_healthy]
+    for ing in carb:
+        matched_word_to_healthy = ing['matched_word']
+        if matched_word_to_healthy in to_healthy_swap:
+            ing['ingredient']=to_healthy_swap[matched_word_to_healthy]
+            swapped_words_to_healthy[matched_word_to_healthy]=to_healthy_swap[matched_word_to_healthy]
+    for ing in condiment:
+        matched_word_to_healthy = ing['matched_word']
+        if matched_word_to_healthy in to_healthy_swap:
+            ing['ingredient']=to_healthy_swap[matched_word_to_healthy]
+            swapped_words_to_healthy[matched_word_to_healthy]=to_healthy_swap[matched_word_to_healthy]
+    #changing diretions
+    for step in recipe['steps']:
+        #replace frying with baking
+        if "fry" in step['methods']:
+            fry_time = step['times']
+            #baking takes 4 times as long as frying
+            fry_time_array = fry_time[0].split(" ")
+            #print(fry_time_array)
+            orig_time=fry_time_array[0]
+            fry_time_array[0] = str(eval(fry_time_array[0])*4)
+            step['times'][0]=" ".join(fry_time_array)
+            swapped_words_to_healthy[orig_time]=fry_time_array[0]
+            for i in range(len(step['methods'])):
+                if step['methods'][i] == "fry":
+                    #print("swap")
+                    #print(step['methods'])
+                    step['methods'][i] = "bake"
+                    #print(method)
+                    swapped_words_to_healthy["fry"]="bake"
+                    #print(step['methods'])
+        #print(step['methods'])
+        step_ingredients_th = step['ingredients']
+        print(swapped_words_to_healthy)
+        step['ingredients'] = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in step_ingredients_th]
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+    return recipe
 
 def to_non_healthy(recipe):
     '''

@@ -128,16 +128,32 @@ def split_ingredients(ingredients):
             ingredient["matched_word"] = item
             food_split[food_type].append(ingredient)
             continue
-        
+
         # split ingredient and iterate over each word
         sp_ing = item.split(' ')
+
+        # do bigrams first, then singular words
         if len(sp_ing) > 1:
-            for tkn in sp_ing:
-                food_type = kw_in_food_group_set(tkn)
+            bigrams = [sp_ing[i:] for i in range(2)]
+            bigrams = zip(*bigrams)
+            bigrams = [" ".join(bigram) for bigram in list(bigrams)]
+
+            bigram_flag = False
+            for bigram in bigrams:
+                food_type = kw_in_food_group_set(bigram)
                 if food_type:
-                    ingredient["matched_word"] = tkn
+                    ingredient["matched_word"] = bigram
+                    bigram_flag = True
                     food_split[food_type].append(ingredient)
                     break
+
+            if not bigram_flag:
+                for tkn in sp_ing:
+                    food_type = kw_in_food_group_set(tkn)
+                    if food_type:
+                        ingredient["matched_word"] = tkn
+                        food_split[food_type].append(ingredient)
+                        break
             if "matched_word" in ingredient:
                 continue
 
@@ -153,7 +169,7 @@ def split_ingredients(ingredients):
                 food_match = best_food
         ingredient["matched_word"] = food_match
         food_split[food_group].append(ingredient)
-        
+
         if debug and len(ingredient) < min_lev * 1.5:
             print(f"Ingredient: ({ingredient['ingredient']}) matched to ({ingredient['matched_word']}) has a lev score of {min_lev} that is extremely high")
 

@@ -1,42 +1,46 @@
 import json
 from src.lib.helpers import best_match
-
 protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
+
 def transform_cuisine_ingredients(recipe, cuisine):
     '''
     Takes the recipe and cuisine and transforms the ingredients in the recipe for that cuisine
     '''
     for food_type in recipe['ingredients']:
 
-        c_transformations = cuisine[food_type]
+        cuisine_food_type = cuisine[food_type]
         for ing in recipe['ingredients'][food_type]:
+            # overwrite the changes we made for the ingredient (if any customizations are found)
+            if set_custom_ingredient(ing, cuisine['custom']):
+                continue
             # special method for protein
             if 'protein' in food_type:
-                set_cuisine_protein_ingredient(
-                    ing, food_type, cuisine, c_transformations)
+                set_protein_ingredient(
+                    ing, food_type, cuisine)
                 continue
 
             # if the matched word is not already an ingredient in the cuisine
-            if len(c_transformations) and ing['matched_word'] not in c_transformations:
+            if len(cuisine_food_type) and ing['matched_word'] not in cuisine_food_type:
                         # if any (key in ing['matched_word']:
-                set_cuisine_generic_ingredient(
-                    ing, cuisine, c_transformations)
-                # if the ingredient is already a part of the cuisine, then remove it from the cuisine dict
+                set_generic_ingredient(
+                    ing, cuisine_food_type)
+            # if the ingredient is already a part of the cuisine, then remove it from the cuisine dict
             else:
                 ing['transformed_ing'] = ing['ingredient']
-                if len(c_transformations):
-                    if type(c_transformations) == list:
-                        c_transformations.remove(ing['matched_word'])
-                    elif type(c_transformations) == dict:
-                        del c_transformations[ing['matched_word']]
+                if len(cuisine_food_type):
+                    if type(cuisine_food_type) == list:
+                        cuisine_food_type.remove(ing['matched_word'])
+                    elif type(cuisine_food_type) == dict:
+                        del cuisine_food_type[ing['matched_word']]
+
+            
 
 
-def set_cuisine_protein_ingredient(ing, protein_type, cuisine, mappings):
+def set_protein_ingredient(ing, protein_type, cuisine):
     '''
     Takes the protein type (primary_protein, secondary_protein, etc.) and transforms the protein
     '''
-    print(mappings)
-    # right now we have an ingredient,
+    # get the protein category for the ingredient from protein.json
     protein_category = protein_json[protein_type.replace(
         '_protein', '')][ing['matched_word']]['category']
     if len(cuisine[protein_type][protein_category]):
@@ -45,7 +49,10 @@ def set_cuisine_protein_ingredient(ing, protein_type, cuisine, mappings):
         ing['transformed_ing'] = ing['ingredient']
 
 
-def set_cuisine_generic_ingredient(ing, cuisine, mappings):
+def set_generic_ingredient(ing, mappings):
+    '''
+    For generic ingredients (not protein)
+    '''
     # if transformations are list
     if type(mappings) == list:
         # remove the first ingredient
@@ -82,4 +89,11 @@ def set_cuisine_generic_ingredient(ing, cuisine, mappings):
         if not len(mappings[food_group]):
             del mappings[food_group]
 
-# def set_cuisine_custom_ingredient(ing, cuisine, mappings):
+def set_custom_ingredient(ing, mappings):
+    '''
+    Overwrites ingredients with custom mappings
+    '''
+    if ing['matched_word'] in mappings:
+        ing['transformed_ing'] = mappings[ing['matched_word']]
+        return True
+    return False

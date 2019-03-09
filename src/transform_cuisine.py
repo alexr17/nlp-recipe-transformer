@@ -33,8 +33,11 @@ def transform_cuisine_ingredients(recipe, cuisine):
                     elif type(cuisine_food_type) == dict:
                         del cuisine_food_type[ing['matched_word']]
 
-            
-
+def transform_cuisine_steps(recipe, cuisine):
+    '''
+    Transforms the steps in the recipe for the given cuisine
+    '''
+    return False
 
 def set_protein_ingredient(ing, protein_type, cuisine):
     '''

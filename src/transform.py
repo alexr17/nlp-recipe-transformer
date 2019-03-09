@@ -1,8 +1,9 @@
 import json
 import nltk
+import copy
 from os import listdir
 from os.path import isfile, join
-from src.transform_cuisine import transform_cuisine_ingredients
+from src.transform_cuisine import transform_cuisine_ingredients, transform_cuisine_steps
 # import statements above here
 
 fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
@@ -106,6 +107,10 @@ def to_cuisine(recipe, cuisine):
         print("There is no transformation for the cuisine you provided")
         return False
 
+    # need to make a deep copy of the recipe
+    recipe = copy.deepcopy(recipe)
     cuisine = json.load(open(path + cuisine_file))
+
     transform_cuisine_ingredients(recipe, cuisine)
+    transform_cuisine_steps(recipe, cuisine)
     return recipe

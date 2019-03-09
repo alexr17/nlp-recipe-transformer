@@ -57,6 +57,15 @@ def format_recipe(raw_recipe):
     ingredients = [ingredient['ingredient'] for ingredient in raw_recipe['ingredients']]
     raw_recipe['ingredients'] = split_ingredients(raw_recipe['ingredients'])
 
+    i = []
+    for ingredient in raw_recipe['ingredients'].values():
+        if ingredient:
+            for ing in ingredient:
+                i.append(ing['matched_word'])
+
+    ingredients = i
+
+
     tools = parse_tools(raw_recipe['steps'])
     raw_recipe['tools'] = tools
 

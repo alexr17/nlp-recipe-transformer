@@ -93,17 +93,17 @@ def split_steps(steps, ingredients, tools, methods):
         }
 
         for s in step:
-            if s in ingredients:
+            if s in ingredients and s not in new_step['ingredients']:
                 new_step['ingredients'].append(s)
-            if s in tools:
+            if s in tools and s not in new_step['tools']:
                 new_step['tools'].append(s)
             if s in methods and s not in new_step['methods']:
                 new_step['methods'].append(s)
 
         for bigram in bigrams:
-            if bigram in ingredients:
+            if bigram in ingredients and bigram not in new_step['ingredients']:
                 new_step['ingredients'].append(bigram)
-            if bigram in tools:
+            if bigram in tools and bigram not in new_step['tools']:
                 new_step['tools'].append(bigram)
             if bigram in methods and bigram not in new_step['methods']:
                 new_step['methods'].append(bigram)

@@ -50,6 +50,8 @@ millimeter
 millimetre
 centimeter
 cubes
+strip
+strips
 centimetre
 meter
 metre

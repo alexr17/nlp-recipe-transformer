@@ -36,6 +36,14 @@ There are several options for you:
             [--readable | -r]
     help (h) - print out this message
     quit (q) - quit
+Here are a few examples:
+    l -r (loads a random recipe)
+    p -p -j (prints the loaded recipe in json format)
+    p -p -r (prints the loaded recipe in readable format)
+    t -v (transforms the loaded recipe to vegetarian)
+    p -t -r (prints the transformed recipe (now veg) in readable format)
+    t -c -j (transforms the loaded recipe to japanese)
+    p -t -r (prints the transformed recipe (now japanese) in readable format)
     """
     print(info)
 

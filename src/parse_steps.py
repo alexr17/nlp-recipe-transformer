@@ -110,7 +110,7 @@ def split_steps(steps, ingredients, tools, methods):
             if timePattern.match(bigram):
                 new_step['times'].append(bigram)
             if temperaturePattern.match(bigram):
-                new_step['temperature'].append(bigram)
+                new_step['temperature'].append(bigram + ' F')
 
         new_steps.append(new_step)
 

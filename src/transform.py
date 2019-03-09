@@ -53,6 +53,8 @@ def to_vegetarian(recipe):
 
         protein['descriptors'] = new_descriptors
 
+
+    # Transform steps
     for step in recipe['steps']:
         new_step_ingredients = []
         for ingredient in step['ingredients']:
@@ -62,27 +64,15 @@ def to_vegetarian(recipe):
                 new_step_ingredients.append(ingredient)
         step['ingredients'] = new_step_ingredients
 
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
 
-
-        #new_raw_ingredient = []
-        #raw_ingredient = protein['raw_ingredient'].split(" ")
-        # for x in protein['raw_ingredient'].split(" "):
-        #     if x in swapped_words:
-        #         new_raw_ingredient.append(swapped_words[x])
-        #     elif x in meat_descriptors:
-        #         new_raw_ingredient.append("")
-        #     else:
-        #         new_raw_ingredient.append(x)
-
-        #protein['raw_ingredient'] = " ".join(new_raw_ingredient)
-
-    # Convert directions to vegetarian
-
-        #step['ingredients'] = [swapped_words[x] if x in swapped_words else x for x in step_ingredients]
-        # raw_step = step['raw_step']
-        # splitted_step = nltk.word_tokenize(raw_step)
-        # splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
-        # step['raw_step'] = " ".join(splitted_step)
+    # Transform title
+    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
+    recipe['title'] = " ".join(splitted_title)
 
     return recipe
 
@@ -116,14 +106,7 @@ def to_non_vegetarian(recipe):
                     protein['ingredient'] = non_vegetarian_swap[protein_dict[matched_word]['category']]
                     swapped_words[matched_word] = non_vegetarian_swap[protein_dict[matched_word]['category']]
 
-        # remove meat_descriptors
-        # new_descriptors = []
-        # for descriptor in protein['descriptors']:
-        #     if descriptor not in meat_descriptors:
-        #         new_descriptors.append(descriptor)
-
-        # protein['descriptors'] = new_descriptors
-
+    # Transform steps
     for step in recipe['steps']:
         new_step_ingredients = []
         for ingredient in step['ingredients']:
@@ -132,6 +115,15 @@ def to_non_vegetarian(recipe):
             else:
                 new_step_ingredients.append(ingredient)
         step['ingredients'] = new_step_ingredients
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+
+    # Transform title
+    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
+    recipe['title'] = " ".join(splitted_title)
 
 
     # Add chicken breast if no change in protein

@@ -26,6 +26,8 @@ peeled
 pitted
 unsalted
 halved
+unbaked
+baked
 crumbled
 juiced
 mild

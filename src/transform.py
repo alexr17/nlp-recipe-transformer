@@ -20,6 +20,7 @@ def to_vegetarian(recipe):
     '''
     Converts a recipe to a vegetarian version
     '''
+    recipe = copy.deepcopy(recipe)
 
     # Convert ingredients to vegetarian
     ingredients = recipe['ingredients']
@@ -89,6 +90,9 @@ def to_non_vegetarian(recipe):
     '''
     Converts a parsed vegetarian recipe to one with meat
     '''
+    recipe = copy.deepcopy(recipe)
+
+
     ingredients = recipe['ingredients']
 
     primary_protein = ingredients['primary_protein']
@@ -314,7 +318,7 @@ def to_non_healthy(recipe):
                 "raw_step": "add bacon"
             }
         )
-        recipe['ingredients']['primary_protein'].append("bacon") 
+        recipe['ingredients']['primary_protein'].append("bacon")
     return recipe
 def to_cuisine(recipe, cuisine):
     '''

@@ -72,3 +72,5 @@ fire-roasted
 dry
 freshly
 packed
+juice
+cut into pieces

@@ -12,8 +12,8 @@ spray
 cooking spray
 starch
 potato starch
-eggs
-egg
+egg yolk
+egg white
 tapioca flour
 gelatin
 heavy cream
@@ -21,3 +21,4 @@ bread crumbs
 half and half
 shortening
 lard
+cream

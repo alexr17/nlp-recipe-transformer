@@ -1,5 +1,7 @@
 apple
+applesauce
 apricot
+asian pear
 avocado
 banana
 bell pepper

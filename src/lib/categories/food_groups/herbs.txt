@@ -197,3 +197,4 @@ herbs
 red pepper flakes
 mustard seed
 italian seasoning
+gherkin

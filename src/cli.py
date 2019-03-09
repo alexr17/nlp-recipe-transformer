@@ -81,8 +81,6 @@ def cli_print(line, parsed_recipe, transformed_recipe):
         else:
             print("You need a valid recipe")
 
-
-
 def cli_transform(line, parsed_recipe):
     if not parsed_recipe:
         print("You need to load a recipe before you transform it.")

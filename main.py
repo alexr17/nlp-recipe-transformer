@@ -26,8 +26,8 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
-    # run_cli()
+    # run()
+    run_cli()
     # change this to be any of
     # test_recipes()
     # test_random_recipe()

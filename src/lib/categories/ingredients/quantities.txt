@@ -68,3 +68,9 @@ slices
 slice
 head
 container
+bag
+bags
+dashes
+dash
+sprigs
+sprig

@@ -158,6 +158,10 @@
             "type": "vegetarian",
             "category": "dairy"
         },
+        "cream cheese": {
+            "type": "vegetarian",
+            "category": "dairy"
+        },
         "chickpeas": {
             "type": "vegetarian",
             "category": "bean"

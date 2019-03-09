@@ -52,7 +52,7 @@ def parse_ingredients(ingredients):
         for x in ingredient:
             if x == ')':
                 flag = False
-            if flag:
+            if flag and (x in measurement_kw or x.isdigit()):
                 measurement.append(x)
             elif x in measurement_kw:
                 measurement.append(x)

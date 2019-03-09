@@ -1,0 +1,101 @@
+{
+    "binder": [
+    ],
+    "carb": {
+        "rice": {
+            "alt": ["quinoa", "oats", "couscous", "amaranth"],
+            "types": ["white", "brown"]
+        },
+        "noodles": {
+            "alt": ["pasta", "orzo", "penne", "spaghetti", "linguini", "fettucini", "tagliatelle"],
+            "types": ["soba", "udon"]
+        }
+    },
+    "condiment": [
+        "soy sauce",
+        "oyster sauce",
+        "ponzu",
+        "teryaki sauce",
+        "dashi"
+    ],
+    "fruit": [
+        "asian pear"
+    ],
+    "herb": [
+        "thyme",
+        "oregano",
+        "sesame seeds",
+        "ginger",
+        "seaweed",
+        "yuzu relish",
+        "salt"
+    ],
+    "primary_protein": {
+        "soy": [
+            "tofu"
+        ],
+        "meat": [
+            "pork",
+            "kobe beef"
+        ],
+        "fish": [
+            "salmon",
+            "tuna"
+        ],
+        "poultry": [
+            "chicken",
+            "eggs"
+        ],
+        "soup": [
+        ]
+    },
+    "secondary_protein": {
+        "shellfish": [
+            "clam",
+            "oyster",
+            "scallop"
+        ],
+        "fish": [
+            "roe",
+            "unagi"
+        ],
+        "bean": [
+            "red bean"
+        ],
+        "poultry": [
+
+        ],
+        "dairy": [
+
+        ]
+    },
+    "tertiary_protein": {
+        "nuts": [
+
+        ],
+        "soy": [
+            
+        ]
+    },
+    "vegetable": [
+        "daikon",
+        "green onions",
+        "carrots",
+        "cabbage",
+        "cucumbers"
+    ],
+    "cooking methods": [
+        "raw",
+        "grilled",
+        "simmered",
+        "steamed",
+        "boiled"
+    ],
+    "custom": {
+        "beer": "sake",
+        "wine": "sake",
+        "vegetable stock": "miso broth",
+        "vegetable broth": "miso broth",
+        "vegetable stew": "miso broth"
+    }
+}

@@ -17,3 +17,13 @@ def levenshtein(s1, s2):
         previous_row = current_row
     
     return previous_row[-1]
+
+def best_match(min_lev, food_group, ingredient):
+    food_match = ''
+    for food in food_group:
+        lev = levenshtein(food, ingredient)
+        # print(lev)
+        if lev < min_lev:
+            min_lev = lev
+            food_match = food
+    return min_lev, food_match

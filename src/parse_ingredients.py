@@ -1,7 +1,7 @@
 import nltk
 import json
 from src.lib.clean import valid_tkn
-from src.lib.helpers import levenshtein
+from src.lib.helpers import best_match
 
 debug = False
 
@@ -70,9 +70,6 @@ def parse_ingredients(ingredients):
                 num = int(num)
             number += num
 
-        # default quantity to 1
-        # if not number:
-        # 	number = 1
         descriptors = [x for x in ingredient if x in descriptor_kw]
 
         stopwords = set(descriptors) | set(measurement) | set(quantity)
@@ -177,13 +174,3 @@ def split_ingredients(ingredients):
             print(f"Ingredient: ({ingredient['ingredient']}) matched to ({ingredient['matched_word']}) has a lev score of {min_lev} that is extremely high")
 
     return food_split
-
-def best_match(min_lev, food_group, ingredient):
-    food_match = ''
-    for food in food_group:
-        lev = levenshtein(food, ingredient)
-        # print(lev)
-        if lev < min_lev:
-            min_lev = lev
-            food_match = food
-    return min_lev, food_match

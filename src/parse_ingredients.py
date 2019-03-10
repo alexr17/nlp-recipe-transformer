@@ -49,18 +49,22 @@ def parse_ingredients(ingredients):
             i += 1
         measurement = []
         flag = False
+        new_ingredient = []
         for x in ingredient:
             if x == ')':
+                new_ingredient.append(x)
                 flag = False
-            if flag and (x in measurement_kw or x.isdigit()):
+            if flag and (x in measurement_kw or x.replace('.','', 1).isdigit()):
                 measurement.append(x)
+                new_ingredient.append(x)
             elif flag:
-                ingredient.remove(x)
+                continue
             elif x in measurement_kw:
                 measurement.append(x)
             if x == '(':
                 flag = True
-
+            new_ingredient.append(x)
+        ingredient = new_ingredient
         # Convert quantity from string to number
         number = 0
         for num in quantity:

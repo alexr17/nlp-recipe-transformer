@@ -92,13 +92,14 @@ def set_generic_ingredient(ing, mappings):
     # if the transformations are a dictionary
     # then try to find each key in the ingredient
     elif type(mappings) == dict:
-
+        # print('using dict for ing:')
+        # print(json.dumps(ing, indent=2))
         # use levenshtein distance to find best match
         min_lev = float("inf")
         food_group = ''
         food_match = ''
         for key in mappings:
-                        # print(set(mappings[key]['alt'] + [key]))
+            # print(set(mappings[key]['alt'] + [key]))
             keywords = set(mappings[key]['alt'] + [key])
 
             lev_score, best_food = best_match(

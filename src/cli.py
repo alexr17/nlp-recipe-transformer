@@ -14,7 +14,7 @@ def print_cli_information():
     Prints the CLI info (what keys to press)
     '''
     info = """
-Welcome to Alex and Itay's recipe transformer!
+Welcome to Alex, Itay, and Tony's recipe transformer!
 The general outline of this CLI is as follows:
 There are several options for you:
     load (l) - load a recipe into our program

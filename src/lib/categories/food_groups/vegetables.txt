@@ -34,7 +34,6 @@ chayote
 chives
 cilantro
 collard green
-corn
 corn salad
 courgette
 cucumber
@@ -122,3 +121,4 @@ olives
 peas
 tomatoes
 clover sprouts
+pimentos

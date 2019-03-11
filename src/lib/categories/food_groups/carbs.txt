@@ -16,7 +16,6 @@ biscuit
 crust
 fries
 granola
-noodles
 spaghetti
 crackers
 soba
@@ -28,8 +27,10 @@ macaroni
 marshmallow
 frosting
 all-purpose flour
-pitas
 couscous
 crouton
 pie crust
 oats
+egg noodles
+rice noodles
+pita bread

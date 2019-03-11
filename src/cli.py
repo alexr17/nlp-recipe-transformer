@@ -4,7 +4,7 @@ from random import randint
 from fractions import Fraction
 from src.parse import parse_html, format_recipe
 from src.lib.debug import test_random_recipe
-from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian
+from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian,cooking_method
 
 
 def print_cli_information():
@@ -24,9 +24,14 @@ There are several options for you:
         [--meat | -m]
         [--healthy | -h]
         [--unhealthy | -u]
-        [--cuisine | -c] 
+        [--cuisine | -c]
             [--mediterranean | -m] 
             [--japanese | -j]
+        [--cooking_methods | -cm]
+            [--frytobake | -fb]
+            [--steamtogrill | -sg]
+            [--frytogrill | -fg]
+            etc.
     print (p) - display the recipe
         [--parsed | -p]
             [--json | -j]
@@ -44,6 +49,7 @@ Here are a few examples:
     p -t -r (prints the transformed recipe (now veg) in readable format)
     t -c -j (transforms the loaded recipe to japanese)
     p -t -r (prints the transformed recipe (now japanese) in readable format)
+    p -t -cm -bf (prints the transformed recipe from bake to fry in readable format)
     """
     print(info)
 
@@ -131,6 +137,43 @@ def cli_transform(line, parsed_recipe):
     elif line[1] in {'--unhealthy', '-u'}:
         print("Recipe transformed to unhealthy")
         return to_non_healthy(parsed_recipe)
+    elif line[1] in {'--cooking_methods | -cm'} and len(line) > 2:
+        if line[2] in {'--baketofry', '-bf'}:
+            print("Recipe transformed from bake to fry")
+            return cooking_method(parsed_recipe, 'bake', 'fry')
+        elif line[2] in {'--baketogrill', '-bg'}:
+            print("Recipe transformed from bake to grill")
+            return cooking_method(parsed_recipe, 'bake', 'grill')
+        elif line[2] in {'--baketofry', '-bs'}:
+            print("Recipe transformed from bake to steam")
+            return cooking_method(parsed_recipe, 'bake', 'steam')
+        elif line[2] in {'--frytobake', '-fb'}:
+            print("Recipe transformed from fry to bake")
+            return cooking_method(parsed_recipe, 'fry', 'bake')
+        elif line[2] in {'--frytosteam', '-fs'}:
+            print("Recipe transformed from fry to steam")
+            return cooking_method(parsed_recipe, 'fry', 'steam')
+        elif line[2] in {'--frytobake', '-fg'}:
+            print("Recipe transformed from fry to grill")
+            return cooking_method(parsed_recipe, 'fry', 'grill')
+        elif line[2] in {'--grilltobake', '-gb'}:
+            print("Recipe transformed from grill to bake")
+            return cooking_method(parsed_recipe, 'grill', 'bake')
+        elif line[2] in {'--grilltofry', '-gf'}:
+            print("Recipe transformed from grill to fry")
+            return cooking_method(parsed_recipe, 'grill', 'fry')
+        elif line[2] in {'--grilltobake', '-gs'}:
+            print("Recipe transformed from grill to steam")
+            return cooking_method(parsed_recipe, 'grill', 'steam')
+        elif line[2] in {'--steamtobake', '-sb'}:
+            print("Recipe transformed from steam to bake")
+            return cooking_method(parsed_recipe, 'steam', 'bake')
+        elif line[2] in {'--steamtobake', '-sg'}:
+            print("Recipe transformed from steam to grill")
+            return cooking_method(parsed_recipe, 'steam', 'grill')
+        elif line[2] in {'--steamtobake', '-sf'}:
+            print("Recipe transformed from steam to fry")
+            return cooking_method(parsed_recipe, 'steam', 'fry')
     else:
         return False
 

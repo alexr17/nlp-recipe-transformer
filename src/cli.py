@@ -95,17 +95,38 @@ def pretty_print(recipe):
     ingredients = []
     for food_type in recipe['ingredients']:
         for ing in recipe['ingredients'][food_type]:
-            s = '\n' + (str(Fraction(ing['quantity'])) + ' ' if ing['quantity'] else '') + (ing['measurement'] + ' ' if ing['measurement'] else '') + ing['ingredient'].title()
-            if len(ing['descriptors']):
-                s += "\nWith additional descriptors: " + ' '.join(ing['descriptors'])
-            ingredients.append(s)
+            ingredients.append(format_ingredient(ing))
     print("\nThe ingredients that will be used are as follows:\n" + '\n'.join(ingredients))
 
     steps = []
     for step in recipe['steps']:
         steps.append('\n' + step['raw_step'])
     
-    print("\nThe steps that will be used are as follows (this does not work for transformations):\n" + '\n'.join(steps))
+    print("\nThe steps that will be used are as follows:\n" + '\n'.join(steps))
+
+def format_ingredient(ing):
+    s = '\n' + (str(Fraction(ing['quantity']).limit_denominator()) + ' ' if ing['quantity'] else '') + (ing['measurement'] + ' ' if ing['measurement'] else '')
+    adv = ''
+    size = ''
+    front = []
+    back = []
+    for desc in ing['descriptors']:
+        # adverb
+        if desc[-2:] == 'ly' or desc in {'very'}:
+            adv = desc + ' '
+        # size
+        elif desc in {'small', 'medium', 'large', 'lean', 'big'}:
+            size = desc
+        # back descriptor
+        elif desc[-2:] in {'ed', 'en'}:
+            back.append(adv + desc)
+            adv = ''
+        # front descriptor
+        else:
+            front.append(adv + desc)
+            adv = ''
+    s += ','.join(front) + size + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
+    return s
 
 def cli_transform(line, parsed_recipe):
     if not parsed_recipe:

@@ -70,7 +70,7 @@ lettuce
 mamey
 mangetout
 marjoram
-mushroom
+mushrooms
 mustard green
 navy bean
 new zealand spinach

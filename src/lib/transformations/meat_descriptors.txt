@@ -3,3 +3,4 @@ skinless
 bouillon
 meat
 deveined
+open up

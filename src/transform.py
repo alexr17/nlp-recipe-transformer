@@ -36,7 +36,7 @@ def to_vegetarian(recipe):
 
     vegetarian_swap = json.load(open('./src/lib/transformations/to_vegetarian.json'))
     meat_descriptors = set([line.strip() for line in open('./src/lib/transformations/meat_descriptors.txt')])
-    swapped_words = {}
+    swapped_words = {'meat': 'vegetarian concoction'}
 
     for protein in proteins:
         matched_word = protein['matched_word']
@@ -63,16 +63,18 @@ def to_vegetarian(recipe):
             else:
                 new_step_ingredients.append(ingredient)
         step['ingredients'] = new_step_ingredients
+        for ing in swapped_words:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words[ing])
+            if ing in meat_descriptors:
+                step['raw_step'] = step['raw_step'].replace(ing, "")
+        step['raw_step'] = " ".join(step['raw_step'].split())
 
-        raw_step = step['raw_step']
-        splitted_step = raw_step.split(" ")
-        splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
-        step['raw_step'] = " ".join(splitted_step)
 
     # Transform title
-    splitted_title = recipe['title'].split(" ")
-    splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
-    recipe['title'] = " ".join(splitted_title)
+    for ing in swapped_words:
+        if ing in recipe['title']:
+            recipe['title'] = recipe['title'].replace(ing, swapped_words[ing])
 
     return recipe
 
@@ -115,15 +117,17 @@ def to_non_vegetarian(recipe):
             else:
                 new_step_ingredients.append(ingredient)
         step['ingredients'] = new_step_ingredients
-        raw_step = step['raw_step']
-        splitted_step = raw_step.split(" ")
-        splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
-        step['raw_step'] = " ".join(splitted_step)
+        for ing in swapped_words:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words[ing])
 
     # Transform title
-    splitted_title = recipe['title'].split(" ")
-    splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
-    recipe['title'] = " ".join(splitted_title)
+    for ing in swapped_words:
+        if ing in recipe['title']:
+            recipe['title'] = recipe['title'].replace(ing, swapped_words[ing])
+
+    if not flag:
+        recipe['title'] = 'chicken ' + recipe['title']
 
 
     # Add chicken breast if no change in protein
@@ -152,6 +156,7 @@ def to_non_vegetarian(recipe):
             "methods": ["grilled", "slice"],
             "times": ["7 minutes"],
             "temperature": ["165 degrees"],
+            "raw_step": "spray cooking spray on pan. grill chicken at 165 degrees for 7 minutes (or until golden). slice chicken when done."
 
         })
     return recipe

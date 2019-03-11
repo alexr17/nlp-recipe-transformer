@@ -29,38 +29,146 @@ This project will have two main components: parsing, and transforming. A third, 
 The parsing file should have a function that takes a url and returns a dict containing the following items in a format like this:
 ```json
 {
-    "ingredients": {
-        "salt": {
-            "quantity": 1,
-            "measurement": "tbsp"
-        },
-        "flour": {
-            "quantity": 2,
-            "measurement": "cup"
-        },
-        "sugar": {
-            "quantity": 0.5,
-            "measurement": "cup"
-        }
+  "title": "pineapple enchiladas",
+  "ingredients": {
+    "fruit": [
+      {
+        "quantity": 1,
+        "measurement": "20 ounce can",
+        "ingredient": "pineapple",
+        "descriptors": [
+          "crushed"
+        ]
+      }
+    ],
+    "herb": [],
+    "vegetable": [],
+    "condiment": [
+      {
+        "quantity": 1,
+        "measurement": "10 ounce can",
+        "ingredient": "enchilada sauce",
+        "descriptors": [
+          "divided"
+        ]
+      }
+    ],
+    "carb": [
+      {
+        "quantity": 6,
+        "measurement": "8 inch",
+        "ingredient": "flour tortillas",
+        "descriptors": []
+      }
+    ],
+    "binder": [
+      {
+        "quantity": 0.25,
+        "measurement": "cup",
+        "ingredient": "sour cream",
+        "descriptors": []
+      }
+    ],
+    "primary_protein": [],
+    "secondary_protein": [
+      {
+        "quantity": 2,
+        "measurement": "cups",
+        "ingredient": "cheddar cheese",
+        "descriptors": [
+          "shredded",
+          "divided"
+        ]
+      }
+    ],
+    "tertiary_protein": []
+  },
+  "steps": [
+    {
+      "ingredients": [],
+      "tools": [
+        "oven"
+      ],
+      "methods": [
+        "preheat"
+      ],
+      "times": [],
+      "temperature": [
+        "375 degrees F",
+        "190 degrees F"
+      ],
+      "raw_step": "preheat oven to 375  degrees f (190 degrees c)."
     },
-    "tools": ["whisk", "bowl", "oven"],
-    "cooking_methods": {
-        "primary": "bake",
-        "other": []
+    {
+      "ingredients": [
+        "pineapple",
+        "cream",
+        "cheese"
+      ],
+      "tools": [
+        "bowl"
+      ],
+      "methods": [
+        "combine"
+      ],
+      "times": [],
+      "temperature": [],
+      "raw_step": "in a medium bowl combine pineapple, sour cream and 1 cup cheese."
     },
-    "steps": [
-        {
-            "description": "blah blah blah",
-            "ingredients": {
-                "salt": {
-                    "quantity": 0.5,
-                    "measurement": "tbsp"
-                }
-            },
-            "tools": [],
-            "cooking_method": "stirring"
-        }
+    {
+      "ingredients": [],
+      "tools": [],
+      "methods": [
+        "pour"
+      ],
+      "times": [],
+      "temperature": [],
+      "raw_step": "pour 1/4 cup enchilada sauce in the bottom of a 9 x 13 inch baking dish."
+    },
+    {
+      "ingredients": [
+        "pineapple",
+        "cheese"
+      ],
+      "tools": [],
+      "methods": [
+        "pour",
+        "sprinkle"
+      ],
+      "times": [],
+      "temperature": [],
+      "raw_step": "fill tortillas with pineapple mixture, roll and place in baking dish.  pour on remaining enchilada sauce and sprinkle with remaining cheese."
+    },
+    {
+      "ingredients": [],
+      "tools": [
+        "oven"
+      ],
+      "methods": [
+        "bake"
+      ],
+      "times": [
+        "30 minutes"
+      ],
+      "temperature": [],
+      "raw_step": "bake, covered, in preheated oven for 30 minutes."
+    }
+  ],
+  "tools": [
+    "bowl",
+    "oven"
+  ],
+  "methods": {
+    "primary_methods": [
+      "bake",
+      "preheat"
+    ],
+    "secondary_methods": [
+      "combine",
+      "sprinkle",
+      "pour"
     ]
+  }
 }
 ```
 

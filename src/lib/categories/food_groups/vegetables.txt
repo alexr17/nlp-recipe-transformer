@@ -9,8 +9,8 @@ aubergine
 azuki bean
 banana squash
 basil
-bean sprout
-beet
+bean sprouts
+beets
 black beans
 black-eyed pea
 bok choy
@@ -23,7 +23,6 @@ butternut squash
 cabbage
 calabrese
 caraway
-carrot
 carrots
 cauliflower
 cayenne pepper
@@ -35,14 +34,13 @@ chayote
 chives
 cilantro
 collard green
-corn
 corn salad
 courgette
 cucumber
 daikon
 delicata
 dill
-eggplant
+eggplants
 endive
 fava beans
 fennel
@@ -51,8 +49,8 @@ frisee
 garlic
 gem squash
 ginger
+green onions
 green beans
-green bean
 green pepper
 habanero
 herbs and spice
@@ -65,27 +63,26 @@ kale
 kohlrabi
 lavender
 leek
-legume
+legumes
 lemon grass
 lettuce
 mamey
 mangetout
 marjoram
-mushroom
+mushrooms
 mustard green
 navy bean
 new zealand spinach
 nopale
 okra
-onion
+onions
 oregano
 paprika
 parsley
 parsnip
 patty pan
-pea
 pinto beans
-potato
+potatoes
 pumpkin
 radicchio
 radish
@@ -95,31 +92,33 @@ runner bean
 rutabaga
 garbanzo beans
 sage
-scallion
-shallot
+scallions
+shallots
 skirret
 snap peas
 spaghetti squash
 spinach
 squash
-sweet potato
-tabasco pepper
+sweet potatoes
+tabasco peppers
 taro
 tat soi
 thyme
 topinambur
 tubers
-turnip
+turnips
 wasabi
-water chestnut
+water chestnuts
 watercress
 white radish
 yam
 zucchini
-green onion
 vegetables
 lotus seed
 chipotle pepper
 capers
 olives
 peas
+tomatoes
+clover sprouts
+pimentos

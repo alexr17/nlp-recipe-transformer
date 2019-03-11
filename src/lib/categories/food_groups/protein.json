@@ -96,14 +96,6 @@
             "type": "meat",
             "category": "meat"
         },
-        "ground beef": {
-            "type": "meat",
-            "category": "meat"
-        },
-        "pork chops": {
-            "type": "meat",
-            "category": "meat"
-        },
         "turkey breast": {
             "type": "meat",
             "category": "poultry"
@@ -235,6 +227,11 @@
         "almonds": {
             "type": "vegetarian",
             "category": "nuts"
+        },
+        "cashews": {
+            "type": "vegetarian",
+            "category": "nuts"
+
         }
     }
 }

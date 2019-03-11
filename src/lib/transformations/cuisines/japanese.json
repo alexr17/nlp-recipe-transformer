@@ -3,11 +3,11 @@
     ],
     "carb": {
         "rice": {
-            "alt": ["quinoa", "oats", "couscous", "amaranth"],
+            "alt": ["quinoa", "oats", "couscous", "amaranth", "orzo"],
             "types": ["white", "brown"]
         },
         "noodles": {
-            "alt": ["pasta", "orzo", "penne", "spaghetti", "linguini", "fettucini", "tagliatelle"],
+            "alt": ["pasta", "penne", "spaghetti", "linguini", "fettucini", "tagliatelle"],
             "types": ["soba", "udon"]
         }
     },
@@ -43,8 +43,7 @@
             "tuna"
         ],
         "poultry": [
-            "chicken",
-            "eggs"
+            "chicken"
         ],
         "soup": [
         ]
@@ -96,6 +95,8 @@
         "wine": "sake",
         "vegetable stock": "miso broth",
         "vegetable broth": "miso broth",
-        "vegetable stew": "miso broth"
+        "vegetable stew": "miso broth",
+        "sugar": "sugar",
+        "flour": "flour"
     }
 }

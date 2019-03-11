@@ -1,4 +1,4 @@
-aioli
+﻿aioli
 ajvar
 amba
 barbecue sauce
@@ -106,3 +106,6 @@ vegetable oil
 honey
 beer
 dressing
+rum
+white wine
+rice wine

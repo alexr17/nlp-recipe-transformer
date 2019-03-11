@@ -15,6 +15,7 @@ binders_kw = set([line.strip() for line in open('./src/lib/categories/food_group
 protein_json = json.load(open('./src/lib/categories/food_groups/protein.json'))
 primary_protein_kw = set(protein_json['primary'].keys())
 secondary_protein_kw = set(protein_json['secondary'].keys())
+#tertiary_protein_kw = set(protein_json['tertiary'].keys())
 
 def to_vegetarian(recipe):
     '''
@@ -334,3 +335,101 @@ def to_cuisine(recipe, cuisine):
     transform_cuisine_ingredients(recipe, cuisine)
     transform_cuisine_steps(recipe, cuisine)
     return recipe
+
+
+
+
+def to_kosher(recipe):
+    '''
+    Converts a recipe to a kosher version
+    (Assuming that, for ingredients that can be both non-kosher and kosher (i.e. beef), the user (chef) will have only kosher ingredients
+    Kosher-forbidden ingredients are found in to_kosher.json
+    It is forbidden to mix meat and dairy products
+    '''
+    recipe = copy.deepcopy(recipe)
+
+
+    # Convert ingredients to kosher ingredients
+    
+    ingredients = recipe['ingredients']
+    
+    binder = ingredients['binder']
+    condiment = ingredients['condiment']
+    
+    primary_protein = ingredients['primary_protein']
+    secondary_protein = ingredients['secondary_protein']
+    proteins = primary_protein + secondary_protein
+    
+    primary_protein_dict = protein_json['primary']
+    secondary_protein_dict = protein_json['secondary']
+    protein_dict = {**primary_protein_dict, **secondary_protein_dict}
+
+    to_dairy_free_swap = json.load(open('./src/lib/transformations/to_dairy_allergic.json'))
+    to_kosher_swap = json.load(open('./src/lib/transformations/to_kosher.json'))
+    swapped_words_to_kosher = {}
+
+
+    hasmeat= False
+
+    for bind in binder:
+        matched_word = bind['matched_word']
+        if matched_word in to_kosher_swap:
+            bind['ingredient']=to_kosher_swap[matched_word]
+            swapped_words_to_kosher[matched_word]=to_kosher_swap[matched_word]
+    for ing in condiment:
+        matched_word = ing['matched_word']
+        if matched_word in to_kosher_swap:
+            ing['ingredient']=to_kosher_swap[matched_word_to_healthy]
+            swapped_words_to_kosher[matched_word_to_healthy]=to_kosher_swap[matched_word_to_healthy]
+    for protein in proteins:
+        matched_word = protein['matched_word']
+        if matched_word in to_kosher_swap:
+            protein['ingredient'] = to_kosher_swap[protein_dict[matched_word]]
+            swapped_words_to_kosher[matched_word] = to_kosher_swap[protein_dict[matched_word]['category']]
+        #check if recipe has a meat ingredient
+        if protein_dict[matched_word]['type'] == 'meat':
+            if protein_dict[matched_word]['category'] in {'soup', 'meat', 'poultry'}:
+                hasmeat = True
+
+
+    #If recipe has a meat ingredient, transfrom dairy products into non-dairy ingredients
+    if hasmeat == True:
+        for bind in binder:
+            matched_word = bind['matched_word']
+            if matched_word in to_dairy_free_swap:
+                bind['ingredient']=to_dairy_free_swap[matched_word]
+                swapped_words_to_kosher[matched_word]=to_dairy_free_swap[matched_word]
+
+        for protein in secondary_protein:
+            matched_word = protein['matched_word']
+            if matched_word in secondary_protein_dict:
+                if secondary_protein_dict[matched_word]['category'] in {'dairy'}:
+                    protein['ingredient'] = to_dairy_free_swap[matched_word]
+                    swapped_words_to_kosher[matched_word] = to_dairy_free_swap[matched_word]
+
+
+
+    # Transform steps
+    for step in recipe['steps']:
+        new_step_ingredients = []
+        for ingredient in step['ingredients']:
+            if ingredient in swapped_words_to_kosher:
+                new_step_ingredients.append(swapped_words_to_kosher[ingredient])
+            else:
+                new_step_ingredients.append(ingredient)
+        step['ingredients'] = new_step_ingredients
+
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words_to_kosher[x] if x in swapped_words_to_kosher else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+
+    # Transform title
+    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = [swapped_words_to_kosher[x] if x in swapped_words_to_kosher else x for x in splitted_title]
+    recipe['title'] = " ".join(splitted_title)
+
+    return recipe
+
+
+

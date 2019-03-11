@@ -65,12 +65,12 @@ def to_vegetarian(recipe):
         step['ingredients'] = new_step_ingredients
 
         raw_step = step['raw_step']
-        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = raw_step.split(" ")
         splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
 
     # Transform title
-    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = recipe['title'].split(" ")
     splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
     recipe['title'] = " ".join(splitted_title)
 
@@ -116,12 +116,12 @@ def to_non_vegetarian(recipe):
                 new_step_ingredients.append(ingredient)
         step['ingredients'] = new_step_ingredients
         raw_step = step['raw_step']
-        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = raw_step.split(" ")
         splitted_step = [swapped_words[x] if x in swapped_words else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
 
     # Transform title
-    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = recipe['title'].split(" ")
     splitted_title = [swapped_words[x] if x in swapped_words else x for x in splitted_title]
     recipe['title'] = " ".join(splitted_title)
 

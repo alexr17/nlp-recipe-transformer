@@ -1,11 +1,13 @@
 import fileinput
 import json
+import copy
 from random import randint
 from fractions import Fraction
 from src.parse import parse_html, format_recipe
 from src.lib.debug import test_random_recipe
 from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian
 
+debug = False
 
 def print_cli_information():
     '''
@@ -84,11 +86,19 @@ def cli_print(line, parsed_recipe, transformed_recipe):
         
         if recipe:
             if line[2] in {'--json', '-j'}:
-                print(json.dumps(recipe, indent=2))
+                print(json.dumps(clean_recipe(copy.deepcopy(recipe)), indent=2))
             elif line[2] in {'--readable', '-r'}:
                 pretty_print(recipe)
         else:
             print("You need a valid recipe")
+
+def clean_recipe(recipe):
+    if not debug:
+        for food_type in recipe['ingredients']:
+            for ing in recipe['ingredients'][food_type]:
+                del ing['raw_ingredient']
+                del ing['matched_word']
+    return recipe
 
 def pretty_print(recipe):
     print("\nTitle: " + recipe['title'].title())

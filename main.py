@@ -1,5 +1,5 @@
 from src.parse import parse_html, format_recipe
-from src.transform import to_vegetarian, to_non_vegetarian, to_cuisine, to_healthy, to_non_healthy, to_kosher
+from src.transform import to_vegetarian, to_non_vegetarian, to_cuisine, to_healthy, to_non_healthy, to_kosher, to_halal, to_non_halal
 from src.lib.debug import test_recipes, test_random_recipe
 from src.cli import run_cli
 from random import randint
@@ -24,6 +24,16 @@ def run():
     formatted_recipe = to_kosher(parsed_recipe)
     print('-------------- Converting to Kosher: -------------------')
     print(json.dumps(formatted_recipe, indent=2))
+
+    formatted_recipe = to_halal(parsed_recipe)
+    print('-------------- Converting to Halal: -------------------')
+    print(json.dumps(formatted_recipe, indent=2))
+
+    formatted_recipe = to_non_halal(parsed_recipe)
+    print('-------------- Converting to Haram (Non-Halal): -------------------')
+    print(json.dumps(formatted_recipe, indent=2))
+    
+    
     return False
 
 

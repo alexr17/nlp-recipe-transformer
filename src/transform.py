@@ -379,8 +379,8 @@ def to_kosher(recipe):
     for ing in condiment:
         matched_word = ing['matched_word']
         if matched_word in to_kosher_swap:
-            ing['ingredient']=to_kosher_swap[matched_word_to_healthy]
-            swapped_words_to_kosher[matched_word_to_healthy]=to_kosher_swap[matched_word_to_healthy]
+            ing['ingredient']=to_kosher_swap[matched_word]
+            swapped_words_to_kosher[matched_word]=to_kosher_swap[matched_word]
     for protein in proteins:
         matched_word = protein['matched_word']
         if matched_word in to_kosher_swap:
@@ -431,5 +431,142 @@ def to_kosher(recipe):
 
     return recipe
 
+def to_halal(recipe):
+    '''
+    Converts a recipe to a halal version
+    (Assuming that, for ingredients that can be both haram and halal (i.e. beef), the user (chef) will have only halal ingredients.
+    Haram ingredients are found in to_halal.json
+    '''
+    recipe = copy.deepcopy(recipe)
 
 
+    # Convert ingredients to halal ingredients
+    
+    ingredients = recipe['ingredients']
+    
+    binder = ingredients['binder']
+    condiment = ingredients['condiment']
+    herb = ingredients['herb']
+    
+    primary_protein = ingredients['primary_protein']
+    proteins = primary_protein
+    
+    primary_protein_dict = protein_json['primary']
+    protein_dict = {**primary_protein_dict}
+
+    to_halal_swap = json.load(open('./src/lib/transformations/to_halal.json'))
+    swapped_words_to_halal = {}
+
+
+    for bind in binder:
+        matched_word = bind['matched_word']
+        if matched_word in to_halal_swap:
+            bind['ingredient']=to_halal_swap[matched_word]
+            swapped_words_to_halal[matched_word]=to_halal_swap[matched_word]
+    for ing in condiment:
+        matched_word = ing['matched_word']
+        if matched_word in to_halal_swap:
+            ing['ingredient']=to_halal_swap[matched_word]
+            swapped_words_to_halal[matched_word]=to_halal_swap[matched_word]
+    for ing in herb:
+        matched_word = ing['matched_word']
+        if matched_word in to_halal_swap:
+            ing['ingredient']=to_halal_swap[matched_word]
+            swapped_words_to_halal[matched_word]=to_halal_swap[matched_word]
+    for protein in proteins:
+        matched_word = protein['matched_word']
+        if matched_word in to_halal_swap:
+            protein['ingredient'] = to_halal_swap[protein_dict[matched_word]]
+            swapped_words_to_halal[matched_word] = to_halal_swap[protein_dict[matched_word]['category']]
+
+
+    # Transform steps
+    for step in recipe['steps']:
+        new_step_ingredients = []
+        for ingredient in step['ingredients']:
+            if ingredient in swapped_words_to_halal:
+                new_step_ingredients.append(swapped_words_to_halal[ingredient])
+            else:
+                new_step_ingredients.append(ingredient)
+        step['ingredients'] = new_step_ingredients
+
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words_to_halal[x] if x in swapped_words_to_halal else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+
+    # Transform title
+    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = [swapped_words_to_halal[x] if x in swapped_words_to_halal else x for x in splitted_title]
+    recipe['title'] = " ".join(splitted_title)
+
+    return recipe
+
+def to_non_halal(recipe):
+    '''
+    Converts a recipe to a haram version
+    Halal-specific ingredients are found in to_non_halal.json
+    '''
+    recipe = copy.deepcopy(recipe)
+
+
+    # Convert ingredients to non-halal ingredients
+    
+    ingredients = recipe['ingredients']
+    
+    binder = ingredients['binder']
+    condiment = ingredients['condiment']
+    herb = ingredients['herb']
+    
+    primary_protein = ingredients['primary_protein']
+    proteins = primary_protein
+    
+    primary_protein_dict = protein_json['primary']
+    protein_dict = {**primary_protein_dict}
+
+    to_haram_swap = json.load(open('./src/lib/transformations/to_non_halal.json'))
+    swapped_words_to_haram = {}
+
+    for bind in binder:
+        matched_word = bind['matched_word']
+        if matched_word in to_haram_swap:
+            bind['ingredient']=to_haram_swap[matched_word]
+            swapped_words_to_haram[matched_word]=to_haram_swap[matched_word]
+    for ing in condiment:
+        matched_word = ing['matched_word']
+        if matched_word in to_haram_swap:
+            ing['ingredient']=to_haram_swap[matched_word]
+            swapped_words_to_haram[matched_word]=to_haram_swap[matched_word]
+    for ing in herb:
+        matched_word = ing['matched_word']
+        if matched_word in to_haram_swap:
+            ing['ingredient']=to_haram_swap[matched_word]
+            swapped_words_to_haram[matched_word]=to_haram_swap[matched_word]
+    for protein in proteins:
+        matched_word = protein['matched_word']
+        if matched_word in to_haram_swap:
+            protein['ingredient'] = to_haram_swap[protein_dict[matched_word]]
+            swapped_words_to_haram[matched_word] = to_haram_swap[protein_dict[matched_word]['category']]
+
+
+    # Transform steps
+    for step in recipe['steps']:
+        new_step_ingredients = []
+        for ingredient in step['ingredients']:
+            if ingredient in swapped_words_to_haram:
+                new_step_ingredients.append(swapped_words_to_haram[ingredient])
+            else:
+                new_step_ingredients.append(ingredient)
+        step['ingredients'] = new_step_ingredients
+
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words_to_haram[x] if x in swapped_words_to_haram else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
+
+    # Transform title
+    splitted_title = nltk.word_tokenize(recipe['title'])
+    splitted_title = [swapped_words_to_haram[x] if x in swapped_words_to_haram else x for x in splitted_title]
+    recipe['title'] = " ".join(splitted_title)
+
+    return recipe

@@ -235,6 +235,11 @@
         "almonds": {
             "type": "vegetarian",
             "category": "nuts"
+        },
+        "cashews": {
+            "type": "vegetarian",
+            "category": "nuts"
+
         }
     }
 }

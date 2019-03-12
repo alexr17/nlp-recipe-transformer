@@ -157,7 +157,7 @@ def to_non_vegetarian(recipe):
             "methods": ["grilled", "slice"],
             "times": ["7 minutes"],
             "temperature": ["165 degrees"],
-            "raw_step": "spray cooking spray on pan. grill chicken at 165 degrees for 7 minutes (or until golden). slice chicken when done."
+            "raw_step": "spray cooking spray on pan. grill chicken at 165 degrees for 7 minutes (or until golden). slice chicken when done. serve with dish"
 
         })
     return recipe
@@ -392,7 +392,7 @@ def to_cuisine(recipe, cuisine):
 def cooking_method(recipe,convert_from,convert_to):
     '''
     Converts a parsed recipe from the convert_from to the convert_to
-    Options are bake, fry, grill and steam 
+    Options are bake, fry, grill and steam
     '''
     recipe = copy.deepcopy(recipe)
 
@@ -471,7 +471,7 @@ def cooking_method(recipe,convert_from,convert_to):
                 if recipe['methods']['primary_methods'][i] == convert_from or recipe['methods']['primary_methods'][i]=='cook':
                     #print(recipe['methods']['primary_methods'][i])
                     recipe['methods']['primary_methods'][i]=convert_to
-                    #print(recipe['methods']['primary_methods'][i])   
+                    #print(recipe['methods']['primary_methods'][i])
         step['ingredients'] = [swapped_words_cook[x] if x in swapped_words_cook else x for x in step['ingredients']]
         for ing in swapped_words_cook:
             if ing in step['raw_step']:

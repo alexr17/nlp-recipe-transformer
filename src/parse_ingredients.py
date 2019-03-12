@@ -1,8 +1,9 @@
 import nltk
+from nltk.tokenize.moses import MosesDetokenizer
 import json
 from src.lib.clean import valid_tkn
 from src.lib.helpers import best_match
-
+detokenizer = MosesDetokenizer()
 debug = False
 
 fruits_kw = set([line.strip() for line in open('./src/lib/categories/food_groups/fruits.txt')])
@@ -76,7 +77,7 @@ def parse_ingredients(ingredients):
                 num = int(num)
             number += num
 
-        descriptors = [x for x in ingredient if x in descriptor_kw]
+        descriptors = parse_descriptors(ingredient, descriptor_kw)
 
         stopwords = set(descriptors) | set(measurement) | set(quantity)
 
@@ -101,6 +102,23 @@ def parse_ingredients(ingredients):
         )
 
     return new_lst
+
+def parse_descriptors(ingredient, descriptor_kw):
+    descriptors = []
+    remaining = []
+
+    for word in ingredient:
+        if word in descriptor_kw:
+            descriptors.append(word)
+        else:
+            remaining.append(word)
+
+    remaining = detokenizer.detokenize(remaining, return_str=True)
+    for desc in descriptor_kw:
+        if desc in remaining:
+            descriptors += desc.split(' ')
+            # print(descriptors)
+    return descriptors
 
 def kw_in_food_group_set(ingredient):
     '''

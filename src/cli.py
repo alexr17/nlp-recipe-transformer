@@ -5,7 +5,7 @@ from random import randint
 from fractions import Fraction
 from src.parse import parse_html, format_recipe
 from src.lib.debug import test_random_recipe
-from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian
+from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian, cooking_method
 
 debug = False
 
@@ -26,9 +26,14 @@ There are several options for you:
         [--meat | -m]
         [--healthy | -h]
         [--unhealthy | -u]
-        [--cuisine | -c] 
+        [--cuisine | -c]
             [--mediterranean | -m] 
             [--japanese | -j]
+        [--cooking_methods | -cm]
+            [-f | -s | -g | -b]
+                [-f | -s | -g | -b]
+            [--fry | --steam | --bake | --grill]
+                [--fry | --steam | --bake | --grill]
     print (p) - display the recipe
         [--parsed | -p]
             [--json | -j]
@@ -46,9 +51,17 @@ Here are a few examples:
     p -t -r (prints the transformed recipe (now veg) in readable format)
     t -c -j (transforms the loaded recipe to japanese)
     p -t -r (prints the transformed recipe (now japanese) in readable format)
+    t -cm -b -f (transforms the loaded recipe from baked to fried)
+    p -t -r (prints the transformed recipe from baked to fried in readable format)
     """
     print(info)
 
+cooking_method_map = {
+    "f": "fry",
+    "b": "bake",
+    "g": "grill",
+    "s": "steam"
+}
 
 def run_cli():
     '''
@@ -98,6 +111,7 @@ def clean_recipe(recipe):
             for ing in recipe['ingredients'][food_type]:
                 del ing['raw_ingredient']
                 del ing['matched_word']
+        del recipe['recipe_categories']
     return recipe
 
 def pretty_print(recipe):
@@ -162,7 +176,21 @@ def cli_transform(line, parsed_recipe):
     elif line[1] in {'--unhealthy', '-u'}:
         print("Recipe transformed to unhealthy")
         return to_non_healthy(parsed_recipe)
+    elif line[1] in {'--cooking_methods', '-cm'} and len(line) > 3:
+        method1 = line[2].replace('-', '')
+        method2 = line[3].replace('-', '')
+        if method1 in cooking_method_map:
+            method1 = cooking_method_map[method1]
+        if method2 in cooking_method_map:
+            method2 = cooking_method_map[method2]
+        if method1 in cooking_method_map.values() and method2 in cooking_method_map.values() and method1 != method2:
+            print(f"Recipe transformed from {method1} to {method2}")
+            return cooking_method(parsed_recipe, method1, method2)
+        else:
+            print("Invalid cooking methods")
+            return False
     else:
+        print("Invalid transformation try again")
         return False
 
 def cli_load(line):

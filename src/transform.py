@@ -199,13 +199,15 @@ def to_healthy(recipe):
         #replace frying with baking
         if "fry" in step['methods']:
             fry_time = step['times']
-            #baking takes 4 times as long as frying
-            fry_time_array = fry_time[0].split(" ")
-            #print(fry_time_array)
-            orig_time=fry_time_array[0]
-            fry_time_array[0] = str(eval(fry_time_array[0])*4)
-            step['times'][0]=" ".join(fry_time_array)
-            swapped_words_to_healthy[orig_time]=fry_time_array[0]
+            if len(fry_time) != 0:
+                for i in range(len(fry_time)):
+                    #baking takes 4 times as long as frying
+                    fry_time_array = fry_time[i].split(" ")
+                    #print(fry_time_array)
+                    orig_time=fry_time_array[0]
+                    fry_time_array[0] = str(eval(fry_time_array[0])*4)
+                    step['times'][i]=" ".join(fry_time_array)
+                    swapped_words_to_healthy[orig_time]=fry_time_array[0]
             if "fry" in recipe['methods']['primary_methods']:
                 for i in range(len(recipe['methods']['primary_methods'])):
                     if recipe['methods']['primary_methods'][i] == "fry":
@@ -220,7 +222,10 @@ def to_healthy(recipe):
                     #print(method)
                     swapped_words_to_healthy["fry"]="bake"
                     #print(step['methods'])
-        #print(step['methods'])
+            for i in range(len(step['tools'])):
+                if step['tools'][i]=='pan':
+                    step['tools'][i]='pan'
+                    swapped_words_to_healthy['pan']='oven'
         step_ingredients_th = step['ingredients']
         #print(swapped_words_to_healthy)
         step['ingredients'] = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in step_ingredients_th]
@@ -228,6 +233,10 @@ def to_healthy(recipe):
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
+
+        splitted_title = recipe['title'].split(" ")
+        splitted_title = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in splitted_title]
+        recipe['title'] = " ".join(splitted_title)
     return recipe
 
 
@@ -236,6 +245,7 @@ def to_non_healthy(recipe):
     Converts a recipe into a unhealthy version
     '''
     non_healthy_swap = json.load(open('./src/lib/transformations/unhealthy.json'))
+    protein_dict = protein_json['primary']
     swapped_words_not_healthy = {}
     ingredient = recipe['ingredients']
     binder = ingredient['binder']
@@ -267,27 +277,35 @@ def to_non_healthy(recipe):
                 ing['quantity']=ing['quantity']*(2)
     #change all primary protein to spam
     for ing in primary_protein:
-        matched_word_non_healthy=ing['matched_word']
-        ing['ingredient']="SPAM"
+        matched_word_non_healthy = ing['matched_word']
+        if matched_word_non_healthy in protein_dict:
+            if protein_dict[matched_word_non_healthy]['category'] in {'meat','poultry','fish'}:
+                ing['ingredient']='SPAM'
         swapped_words_not_healthy[matched_word_non_healthy]="SPAM"
     #change steps
     for step in recipe['steps']:
         #replace frying with baking
         if "bake" in step['methods']:
             fry_time = step['times']
+            if len(fry_time)!= 0:
+                for i in range(len(fry_time)):
             #baking takes 4 times as long as frying
-            fry_time_array = fry_time[0].split(" ")
+                    fry_time_array = fry_time[i].split(" ")
             #print(fry_time_array)
-            orig_time=fry_time_array[0]
-            fry_time_array[0] = str(eval(fry_time_array[0])*.25)
-            step['times'][0]=" ".join(fry_time_array)
-            swapped_words_not_healthy[orig_time]=fry_time_array[0]
+                    orig_time=fry_time_array[0]
+                    fry_time_array[0] = str(eval(fry_time_array[0])*.25)
+                    step['times'][i]=" ".join(fry_time_array)
+                    swapped_words_not_healthy[orig_time]=fry_time_array[0]
             if "bake" in recipe['methods']['primary_methods']:
                 for i in range(len(recipe['methods']['primary_methods'])):
                     if recipe['methods']['primary_methods'][i] == "bake":
                         #print(recipe['methods']['primary_methods'][i])
                         recipe['methods']['primary_methods'][i]="fry"
                         #print(recipe['methods']['primary_methods'][i])
+                if 'oven' in recipe['tools']:
+                    for i in range(len(recipe['tools'])):
+                        if recipe['tools'][i]=='oven':
+                            recipe['tools'][i]='frying pan'
             for i in range(len(step['methods'])):
                 if step['methods'][i] == "bake":
                     #print("swap")
@@ -296,6 +314,10 @@ def to_non_healthy(recipe):
                     #print(method)
                     swapped_words_not_healthy["bake"]="fry"
                     #print(step['methods'])
+            for i in range(len(step['tools'])):
+                if step['tools'][i]=='oven':
+                    step['tools'][i]='frying pan'
+                    swapped_words_not_healthy['oven']='frying pan'
         #print(step['methods'])
         step_ingredients_th = step['ingredients']
         #print(swapped_words_to_healthy)
@@ -304,19 +326,25 @@ def to_non_healthy(recipe):
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_not_healthy[x] if x in swapped_words_not_healthy else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
+        splitted_title = recipe['title'].split(" ")
+        splitted_title = [swapped_words_not_healthy[x] if x in swapped_words_not_healthy else x for x in splitted_title]
+        recipe['title'] = " ".join(splitted_title)
     if not swapped_words_not_healthy:
         recipe['steps'].append(
             {
                 "ingredients": ["bacon"],
-                "tools": [],
+                "tools": ["skillet"],
                 "methods": [],
                 "times": [],
                 "temperature": [],
-                "raw_step": "add bacon"
+                "raw_step": "put bacon in skillet and fry, once bacon is cooked crumple and add"
             }
         )
         recipe['ingredients']['primary_protein'].append("bacon")
+        recipe['title']=recipe['title']+'with bacon'
     return recipe
+
+
 def to_cuisine(recipe, cuisine):
     '''
     Converts a parsed recipe to a given cuisine
@@ -338,4 +366,93 @@ def to_cuisine(recipe, cuisine):
 
     transform_cuisine_ingredients(recipe, cuisine)
     transform_cuisine_steps(recipe, cuisine)
+    return recipe
+
+
+def cooking_method(recipe,convert_from,convert_to):
+    '''
+    Converts a parsed recipe from the convert_from to the convert_to
+    Options are bake, fry, grill and steam 
+    '''
+    swapped_words_cook = {}
+    time_coeff = {}
+    temp_coeff = {}
+    time_coeff['bake']=1
+    time_coeff['fry']=4
+    time_coeff['grill']=5
+    time_coeff['steam']=4
+    temp_coeff['bake']=0
+    temp_coeff['fry']= -50
+    temp_coeff['grill']= 100
+    for step in recipe['steps']:
+        #bake temp 0 ,time 0
+        #fry temp -50, time /4
+        #grill temp +100, time /5
+        #steam temp none, time /4
+        if convert_from in step['methods'] or convert_from in step['tools'] or 'cook' in step['methods']:
+            new_time = step['times']
+            #change cook time based on coeff
+            if len(new_time)!=0:
+                for i in range(len(new_time)):
+                    new_time_array = new_time[i].split(" ")
+                    orig_time=new_time_array[0]
+                    new_time_array[0] = str(eval(new_time_array[0])*(time_coeff[convert_from]/time_coeff[convert_to]))
+                    step['times'][i]=" ".join(new_time_array)
+                    swapped_words_cook[orig_time]=new_time_array[0]
+        #change temp based on coeff
+        #if converting to steam remove temp
+        if convert_to =='steam':
+            step['temperature']= None
+        else:
+            #if converting from steam set a defalt temp
+            #print('reached1')
+            #print(step['methods'])
+            #print(step['tools'])
+            if ((convert_from =='steam') and (('steam' in step['methods'])or ('cook' in step['methods'])) or (((('grill' in step['methods'])or('fry'in step['methods']) or ('bake' in step['methods'])) or ('grill' in step['tools'])) and (len(step['temperature'])) == 0)):
+                #print('reached2')
+                if convert_to=='bake':
+                    step['temperature']=['425 degrees']
+                if convert_to=='fry':
+                    step['temperature']=['375 degrees']
+                if convert_to=='grill':
+                    step['temperature']=['525 degrees']
+            else:
+                new_temp = step['temperature']
+                #print(new_temp)
+                if len(new_temp)!=0:
+                    new_temp_array = new_temp[0].split(" ")
+                    orig_temp=new_temp_array[0]
+                    new_temp_array[0] = str(eval(new_temp_array[0])*(temp_coeff[convert_from]+temp_coeff[convert_to]))
+                    step['temperature'][0]=" ".join(new_temp_array)
+                    swapped_words_cook[orig_temp]=new_temp_array[0]
+        #change primary methods in recipe
+        for i in range(len(step['methods'])):
+            if step['methods'][i] == convert_from or step['methods'][i]=='cook':
+                #print("swap")
+                #print(step['methods'])
+                step['methods'][i] = convert_to
+                #print(method)
+                if step['methods'][i]== convert_from:
+                    swapped_words_cook[convert_from]=convert_to
+                else:
+                    swapped_words_cook['cook']=convert_to
+                #print(step['methods'])
+        if convert_from in step['tools']:
+            step['tools'].remove(convert_from)
+            step['methods'].append(convert_to)
+            swapped_words_cook[convert_from]=convert_to
+        if convert_from in recipe['tools']:
+            recipe['tools'].remove(convert_from)
+            recipe['methods']['primary_methods'].append(convert_to)
+        if convert_from in recipe['methods']['primary_methods'] or 'cook' in recipe['methods']['primary_methods']:
+            for i in range(len(recipe['methods']['primary_methods'])):
+                if recipe['methods']['primary_methods'][i] == convert_from or recipe['methods']['primary_methods'][i]=='cook':
+                    #print(recipe['methods']['primary_methods'][i])
+                    recipe['methods']['primary_methods'][i]=convert_to
+                    #print(recipe['methods']['primary_methods'][i])   
+        step['ingredients'] = [swapped_words_cook[x] if x in swapped_words_cook else x for x in step['ingredients']]
+        raw_step = step['raw_step']
+        splitted_step = nltk.word_tokenize(raw_step)
+        splitted_step = [swapped_words_cook[x] if x in swapped_words_cook else x for x in splitted_step]
+        step['raw_step'] = " ".join(splitted_step)
     return recipe

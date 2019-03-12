@@ -29,6 +29,7 @@ There are several options for you:
         [--cuisine | -c]
             [--mediterranean | -m] 
             [--japanese | -j]
+            [--mexican | -mex]
         [--cooking-methods | -cm]
             [-f | -s | -g | -b]
                 [-f | -s | -g | -b]
@@ -173,6 +174,9 @@ def cli_transform(line, parsed_recipe):
         elif line[2] in {'--japanese', '-j'}:
             print("Recipe transformed to Japanese")
             return to_cuisine(parsed_recipe, 'japanese')
+        elif line[2] in {'--mexican', '-mex'}:
+            print("Recipe transformed to Mexican")
+            return to_cuisine(parsed_recipe, 'mexican')
     elif line[1] in {'--veg', '-v'}:
         print("Recipe transformed to vegetarian")
         return to_vegetarian(parsed_recipe)

@@ -31,7 +31,7 @@
   ],
   "primary_protein": {
       "soy": [
-        "black bean", "pinto beans", "refried beans"
+        "black beans", "pinto beans", "refried beans"
       ],
       "meat": [
         "carne asada", "carnitas", "pork", "beef"
@@ -43,6 +43,9 @@
         "pollo", "chicken"
       ],
       "soup": [
+      ],
+      "shellfish": [
+
       ]
   },
   "secondary_protein": {

@@ -5,7 +5,7 @@ from random import randint
 from fractions import Fraction
 from src.parse import parse_html, format_recipe
 from src.lib.debug import test_random_recipe
-from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian, cooking_method
+from src.transform import to_cuisine, to_healthy, to_non_healthy, to_non_vegetarian, to_vegetarian, cooking_method, to_halal, to_non_halal, to_kosher
 
 debug = False
 
@@ -34,6 +34,9 @@ There are several options for you:
                 [-f | -s | -g | -b]
             [--fry | --steam | --bake | --grill]
                 [--fry | --steam | --bake | --grill]
+        [--kosher | -k]
+        [--halal | -ha]
+        [--non-halal | -nh]
     print (p) - display the recipe
         [--parsed | -p]
             [--json | -j]
@@ -155,7 +158,7 @@ def format_ingredient(ing):
         else:
             front.append(adv + desc)
             adv = ''
-    s += ' '.join(front) + (' ' + size if size else '') + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
+    s += ' '.join(front) + (' ' if size and len(front) else '') + size + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
     return s
 
 def cli_transform(line, parsed_recipe):
@@ -195,6 +198,15 @@ def cli_transform(line, parsed_recipe):
         else:
             print("Invalid cooking methods")
             return False
+    elif line[1] in {'--kosher', '-k'}:
+        print("Recipe transformed to kosher")
+        return to_kosher(parsed_recipe)
+    elif line[1] in {'--halal', '-ha'}:
+        print("Recipe transformed to halal")
+        return to_halal(parsed_recipe)
+    elif line[1] in {'--non-halal', '-nh'}:
+        print("Recipe transformed to non-halal")
+        return to_non_halal(parsed_recipe)
     else:
         print("Invalid transformation try again")
         return False

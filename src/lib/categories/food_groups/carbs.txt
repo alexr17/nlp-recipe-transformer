@@ -2,7 +2,6 @@ cornmeal
 flour
 sugar
 bread
-corn
 pasta
 rice
 potatoes

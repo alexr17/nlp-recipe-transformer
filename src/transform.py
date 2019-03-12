@@ -569,7 +569,9 @@ def to_kosher(recipe):
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_to_kosher[x] if x in swapped_words_to_kosher else x for x in splitted_step]
-        step['raw_step'] = " ".join(splitted_step)
+        for ing in swapped_words_to_kosher:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_to_kosher[ing])
 
     # Transform title
     splitted_title = nltk.word_tokenize(recipe['title'])
@@ -640,7 +642,9 @@ def to_halal(recipe):
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_to_halal[x] if x in swapped_words_to_halal else x for x in splitted_step]
-        step['raw_step'] = " ".join(splitted_step)
+        for ing in swapped_words_to_halal:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_to_halal[ing])
 
     # Transform title
     splitted_title = nltk.word_tokenize(recipe['title'])
@@ -709,7 +713,9 @@ def to_non_halal(recipe):
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_to_haram[x] if x in swapped_words_to_haram else x for x in splitted_step]
-        step['raw_step'] = " ".join(splitted_step)
+        for ing in swapped_words_to_haram:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_to_haram[ing])
 
     # Transform title
     splitted_title = nltk.word_tokenize(recipe['title'])

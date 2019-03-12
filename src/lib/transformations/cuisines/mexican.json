@@ -1,0 +1,84 @@
+{
+  "binder": [],
+  "carb": {
+      "rice": {
+        "alt": ["quinoa", "oats", "couscous", "amaranth", "orzo"],
+        "types": ["mexican", "cilantro"]
+      },
+      "tortilla": {
+        "alt": ["pita", "bread", "taco", "buns"],
+        "types": ["corn", "flour"]
+      }
+  },
+  "condiment": [
+    "guacamole",
+    "salsa roja",
+    "salsa verde",
+    "chile salsa",
+    "hot sauce"
+  ],
+  "fruit": [
+    "jicame",
+    "chayote"
+  ],
+  "herb": [
+    "cilantro",
+    "garlic",
+    "chile powder",
+    "cumin",
+    "mint",
+    "thyme"
+  ],
+  "primary_protein": {
+      "soy": [
+        "black bean", "pinto beans", "refried beans"
+      ],
+      "meat": [
+        "carne asada", "carnitas", "pork", "beef"
+      ],
+      "fish": [
+        "tilapia", "mahi mahi", "snapper", "tuna"
+      ],
+      "poultry": [
+        "pollo", "chicken"
+      ],
+      "soup": [
+      ]
+  },
+  "secondary_protein": {
+      "shellfish": [
+        "shrimp", "prawns"
+      ],
+      "fish": [
+        "tilapia", "mahi mahi", "snapper", "tuna"
+      ],
+      "bean": [
+        "black bean", "pinto beans", "refried beans"
+      ],
+      "poultry": [
+        "pollo", "chicken"
+      ],
+      "dairy": [
+        "queso"
+      ]
+  },
+  "tertiary_protein": {
+      "nuts": [
+        "chilli lime peanuts"
+      ],
+      "soy": [
+      ]
+  },
+  "vegetable": [
+    "avocado",
+    "sweet corn",
+    "poblano",
+    "chiles"
+  ],
+  "cooking methods": [
+  ],
+  "custom": {
+    "potato": "corn",
+    "potatoes": "corn"
+  }
+}

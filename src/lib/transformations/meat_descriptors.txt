@@ -3,4 +3,7 @@ skinless
 bouillon
 meat
 deveined
+sirlion
+top sirlion
+top-sirlion
 open up

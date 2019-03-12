@@ -96,6 +96,18 @@
             "type": "meat",
             "category": "meat"
         },
+        "ground beef": {
+            "type": "meat",
+            "category": "meat"
+        },
+        "pork chops": {
+            "type": "meat",
+            "category": "meat"
+        },
+        "veal chops": {
+            "type": "meat",
+            "category": "meat"
+        },
         "turkey breast": {
             "type": "meat",
             "category": "poultry"
@@ -104,7 +116,15 @@
             "type": "meat",
             "category": "meat"
         },
+        "beef chorizo": {
+            "type": "meat",
+            "category": "meat"
+        },
         "pepperoni": {
+            "type": "meat",
+            "category": "meat"
+        },
+        "beef pepperoni": {
             "type": "meat",
             "category": "meat"
         },
@@ -119,6 +139,10 @@
         "ham": {
             "type": "meat",
             "category": "meat"
+        },
+        "turkey ham": {
+            "type": "meat",
+            "category": "poultry"
         },
         "bacon": {
             "type": "meat",
@@ -143,6 +167,10 @@
             "category": "poultry"
         },
         "cheese": {
+            "type": "vegetarian",
+            "category": "dairy"
+        },
+        "sour cream": {
             "type": "vegetarian",
             "category": "dairy"
         },

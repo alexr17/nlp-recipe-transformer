@@ -128,3 +128,7 @@ peas
 clover sprouts
 pimentos
 pimientos
+corn
+avocado
+cucumber
+olive

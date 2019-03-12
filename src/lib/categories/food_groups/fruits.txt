@@ -2,7 +2,6 @@ apple
 applesauce
 apricot
 asian pear
-avocado
 banana
 bilberry
 blackberry
@@ -19,7 +18,6 @@ clementine
 cloudberry
 coconut
 cranberry
-cucumber
 currant
 damson
 date
@@ -50,7 +48,6 @@ mango
 mulberry
 nectarine
 nut
-olive
 orange
 pamelo
 papaya

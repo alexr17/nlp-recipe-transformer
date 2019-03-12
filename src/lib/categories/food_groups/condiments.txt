@@ -1,4 +1,4 @@
-aioli
+﻿aioli
 ajvar
 amba
 barbecue sauce
@@ -108,3 +108,12 @@ beer
 dressing
 oyster sauce
 tomato sauce
+rum
+white wine
+rice wine
+vodka
+grape juice
+white wine vinegar
+apple juice
+ginger ale
+white grape juice

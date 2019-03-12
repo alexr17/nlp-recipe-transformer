@@ -1,0 +1,53 @@
+{
+    "binder": [],
+    "carb": {
+        "rice": {
+            "alt": [],
+            "types": []
+        },
+        "noodles": {
+            "alt": [],
+            "types": []
+        }
+    },
+    "condiment": [],
+    "fruit": [
+    ],
+    "herb": [],
+    "primary_protein": {
+        "soy": [
+        ],
+        "meat": [
+        ],
+        "fish": [
+        ],
+        "poultry": [
+        ],
+        "soup": [
+        ]
+    },
+    "secondary_protein": {
+        "shellfish": [
+        ],
+        "fish": [
+        ],
+        "bean": [
+        ],
+        "poultry": [
+        ],
+        "dairy": [
+        ]
+    },
+    "tertiary_protein": {
+        "nuts": [
+        ],
+        "soy": [
+        ]
+    },
+    "vegetable": [
+    ],
+    "cooking methods": [
+    ],
+    "custom": {
+    }
+}

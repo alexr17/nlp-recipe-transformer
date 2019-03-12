@@ -214,9 +214,9 @@ def to_healthy(recipe):
             if "fry" in recipe['methods']['primary_methods']:
                 for i in range(len(recipe['methods']['primary_methods'])):
                     if recipe['methods']['primary_methods'][i] == "fry":
-                        print(recipe['methods']['primary_methods'][i])
+                        # print(recipe['methods']['primary_methods'][i])
                         recipe['methods']['primary_methods'][i]="bake"
-                        print(recipe['methods']['primary_methods'][i])
+                        # print(recipe['methods']['primary_methods'][i])
             for i in range(len(step['methods'])):
                 if step['methods'][i] == "fry":
                     #print("swap")
@@ -381,10 +381,11 @@ def to_cuisine(recipe, cuisine):
 
     # need to make a deep copy of the recipe
     recipe = copy.deepcopy(recipe)
-    cuisine = json.load(open(path + cuisine_file))
+    cuisine_map = json.load(open(path + cuisine_file))
 
-    transform_cuisine_ingredients(recipe, cuisine)
-    transform_cuisine_steps(recipe, cuisine)
+    transform_cuisine_ingredients(recipe, cuisine_map)
+    transform_cuisine_steps(recipe, cuisine_map)
+    recipe['title'] = cuisine.title() + ' ' + recipe['title']
     return recipe
 
 

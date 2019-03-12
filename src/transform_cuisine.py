@@ -54,6 +54,10 @@ def transform_cuisine_steps(recipe, cuisine):
         for ing in mapping:
             if ing in step['raw_step']:
                 step['raw_step'] = step['raw_step'].replace(ing, mapping[ing])
+                # print(f'replacing {ing} with {mapping[ing]}')
+            elif ing[-1] == 's' and ing[:-1] in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing[:-1], mapping[ing])
+                # print(f'replacing {ing[:-1]} with {mapping[ing]}')
     
     for ing in mapping:
         if ing in recipe['title']:

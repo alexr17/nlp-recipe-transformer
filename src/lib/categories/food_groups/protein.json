@@ -190,7 +190,15 @@
             "type": "meat",
             "category": "shellfish"
         },
-        "oyster": {
+        "oysters": {
+            "type": "meat",
+            "category": "shellfish"
+        },
+        "prawns": {
+            "type": "meat",
+            "category": "shellfish"
+        },
+        "scallops": {
             "type": "meat",
             "category": "shellfish"
         }

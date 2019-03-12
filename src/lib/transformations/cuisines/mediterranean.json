@@ -1,41 +1,98 @@
 {
-    "binders": [],
-    "carbs": [
-        "pita"
+    "binder": [
     ],
-    "condiments": [
+    "carb": {
+        "pasta": {
+            "alt": ["noodles", "penne", "spaghetti", "linguini", "fettucini", "tagliatelle", "risotto"],
+            "types": ["semolina", "penne", "risotto"]
+        },
+        "bread": {
+            "alt": ["croutons", "pita", "tortilla", "taco"],
+            "types": ["pita", "whole wheat"]
+        },
+        "quinoa": {
+            "alt": ["rice", "oats", "couscous", "amaranth", "orzo"],
+            "types": ["white", "red"]
+        }
+    },
+    "condiment": [
+        "olive oil",
         "hummus",
         "tzatziki",
         "tahini"
     ],
-    "fruits": [
+    "fruit": [
         "figs",
         "grapes"
     ],
-    "herbs": [
+    "herb": [
         "cumin",
+        "saffron",
+        "paprika",
         "cardamom",
         "cinnamon",
         "turmeric",
-        "saffron",
-        "paprika"
+        "rosemary"
     ],
-    "protein": {
-        "vegetarian": [
-            "greek yogurt",
-            "falafel",
-            "lentils"
+    "primary_protein": {
+        "soy": [
+            "falafel"
         ],
         "meat": [
-            "lamb"
+            "lamb",
+            "sausage"
+        ],
+        "fish": [
+        ],
+        "poultry": [
+            "shwarma"
+        ],
+        "soup": [
+        ],
+        "shellfish": [
+            "cuttlefish"
         ]
     },
-    "vegetables": [
+    "secondary_protein": {
+        "shellfish": [
+            "clams",
+            "prawns"
+        ],
+        "fish": [
+            "sardines"
+        ],
+        "bean": [
+            "falafel"
+        ],
+        "poultry": [
+        ],
+        "dairy": [
+            "greek yogurt",
+            "mozzarella cheese"
+        ]
+    },
+    "tertiary_protein": {
+        "nuts": [
+            "hazelnuts"
+        ],
+        "soy": [
+        ]
+    },
+    "vegetable": [
         "olives",
-        "garbanzo beans",
         "tomatoes",
         "cucumbers",
+        "bell peppers",
         "onions",
-        "eggplants"
-    ]
+        "eggplants",
+        "spinach"
+    ],
+    "cooking methods": [
+    ],
+    "custom": {
+        "beer": "wine",
+        "sake": "wine",
+        "potatoes": "potatoes",
+        "lentils": "lentils"
+    }
 }

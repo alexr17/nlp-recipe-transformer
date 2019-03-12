@@ -102,6 +102,8 @@ def cli_print(line, parsed_recipe, transformed_recipe):
                 print(json.dumps(clean_recipe(copy.deepcopy(recipe)), indent=2))
             elif line[2] in {'--readable', '-r'}:
                 pretty_print(recipe)
+            else:
+                print("You need to pass a valid option")
         else:
             print("You need a valid recipe")
 
@@ -120,13 +122,17 @@ def pretty_print(recipe):
     for food_type in recipe['ingredients']:
         for ing in recipe['ingredients'][food_type]:
             ingredients.append(format_ingredient(ing))
-    print("\nThe ingredients that will be used are as follows:\n" + '\n'.join(ingredients))
+    print("\n-------------------- Ingredients --------------------\n" + '\n'.join(ingredients))
 
     steps = []
     for step in recipe['steps']:
         steps.append('\n' + step['raw_step'])
     
-    print("\nThe steps that will be used are as follows:\n" + '\n'.join(steps))
+    print("\n------------------------ Steps ------------------------\n" + '\n'.join(steps))
+
+    print("\n--------------- Primary Cooking Methods ---------------\n\n" + '\n'.join(recipe['methods']['primary_methods']))
+
+    print("\n------------------------ Tools ------------------------\n\n" + '\n'.join(recipe['tools']))
 
 def format_ingredient(ing):
     s = '\n' + (str(Fraction(ing['quantity']).limit_denominator()) + ' ' if ing['quantity'] else '') + (ing['measurement'] + ' ' if ing['measurement'] else '')
@@ -142,14 +148,14 @@ def format_ingredient(ing):
         elif desc in {'small', 'medium', 'large', 'lean', 'big'}:
             size = desc
         # back descriptor
-        elif desc[-2:] in {'ed', 'en'}:
+        elif desc[-2:] in {'ed', 'en'} or desc in {'juice'}:
             back.append(adv + desc)
             adv = ''
         # front descriptor
         else:
             front.append(adv + desc)
             adv = ''
-    s += ', '.join(front) + (' ' + size if size else '') + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
+    s += ' '.join(front) + (' ' + size if size else '') + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
     return s
 
 def cli_transform(line, parsed_recipe):
@@ -159,7 +165,7 @@ def cli_transform(line, parsed_recipe):
         print("You need to pass more arguments")
     elif line[1] in {'--cuisine', '-c'} and len(line) > 2:
         if line[2] in {'--mediterranean', '-m'}:
-            print("Mediterranean transformation not implemented yet")
+            print("Recipe transformed to Mediterranean")
             return to_cuisine(parsed_recipe, 'mediterranean')
         elif line[2] in {'--japanese', '-j'}:
             print("Recipe transformed to Japanese")

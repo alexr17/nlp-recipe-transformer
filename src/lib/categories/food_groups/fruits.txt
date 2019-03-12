@@ -4,7 +4,6 @@ apricot
 asian pear
 avocado
 banana
-bell pepper
 bilberry
 blackberry
 blackcurrant
@@ -16,7 +15,6 @@ canary melon
 cantaloupe
 cherimoya
 cherry
-chili pepper
 clementine
 cloudberry
 coconut
@@ -78,7 +76,6 @@ star fruit
 strawberry
 tamarillo
 tangerine
-tomato
 ugli fruit
 watermelon
 bananas

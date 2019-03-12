@@ -78,6 +78,7 @@ juice
 cut into pieces
 cut in pieces
 cut in half
+cut into wedges
 unbaked
 thickly
 coarse
@@ -85,3 +86,5 @@ distilled
 cored
 roughly
 big
+de-veined
+slivered

@@ -8,17 +8,17 @@ rice
 potatoes
 croutons
 buns
-waffle
+waffles
 pita
-croissant
+croissants
 cream of wheat
-biscuit
+biscuits
 crust
 fries
 granola
 spaghetti
 crackers
-soba
+soba noodles
 quinoa
 white rice
 brown rice
@@ -28,9 +28,14 @@ marshmallow
 frosting
 all-purpose flour
 couscous
-crouton
+croutons
 pie crust
 oats
 egg noodles
 rice noodles
 pita bread
+tortillas
+corn tortillas
+flour tortillas
+tacos
+english muffins

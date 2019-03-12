@@ -25,8 +25,11 @@ calabrese
 caraway
 carrots
 cauliflower
-cayenne pepper
+cayenne peppers
+bell peppers
+chili peppers
 celeriac
+tomatoes
 celery
 chamomile
 chard
@@ -51,7 +54,8 @@ gem squash
 ginger
 green onions
 green beans
-green pepper
+green peppers
+peppers
 habanero
 herbs and spice
 horseradish
@@ -76,6 +80,7 @@ new zealand spinach
 nopale
 okra
 onions
+onion
 oregano
 paprika
 parsley
@@ -114,11 +119,12 @@ white radish
 yam
 zucchini
 vegetables
+tomatillos
 lotus seed
 chipotle pepper
 capers
 olives
 peas
-tomatoes
 clover sprouts
 pimentos
+pimientos

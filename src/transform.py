@@ -3,6 +3,7 @@ import nltk
 import copy
 from os import listdir
 from os.path import isfile, join
+import re
 from src.transform_cuisine import transform_cuisine_ingredients, transform_cuisine_steps
 # import statements above here
 
@@ -166,6 +167,8 @@ def to_healthy(recipe):
     '''
     Converts a parsed recipe to a healthier version
     '''
+    recipe = copy.deepcopy(recipe)
+
     to_healthy_swap = json.load(open('./src/lib/transformations/healthy.json'))
     swapped_words_to_healthy = {}
     #swapping ingredients
@@ -229,11 +232,16 @@ def to_healthy(recipe):
         step_ingredients_th = step['ingredients']
         #print(swapped_words_to_healthy)
         step['ingredients'] = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in step_ingredients_th]
+        for ing in swapped_words_to_healthy:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_to_healthy[ing])
+        '''
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
-
+        re.sub(r'\s+([?.!"])', r'\1', step['raw_step'])
+        '''
         splitted_title = recipe['title'].split(" ")
         splitted_title = [swapped_words_to_healthy[x] if x in swapped_words_to_healthy else x for x in splitted_title]
         recipe['title'] = " ".join(splitted_title)
@@ -244,6 +252,8 @@ def to_non_healthy(recipe):
     '''
     Converts a recipe into a unhealthy version
     '''
+    recipe = copy.deepcopy(recipe)
+
     non_healthy_swap = json.load(open('./src/lib/transformations/unhealthy.json'))
     protein_dict = protein_json['primary']
     swapped_words_not_healthy = {}
@@ -322,10 +332,17 @@ def to_non_healthy(recipe):
         step_ingredients_th = step['ingredients']
         #print(swapped_words_to_healthy)
         step['ingredients'] = [swapped_words_not_healthy[x] if x in swapped_words_not_healthy else x for x in step_ingredients_th]
+        for ing in swapped_words_not_healthy:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_not_healthy[ing])
+        '''
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_not_healthy[x] if x in swapped_words_not_healthy else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
+        re.sub(r'\s+([?.!"])', r'\1', step['raw_step'])
+        step['raw_step']=" ".join(step['raw_step'].split())
+        '''
         splitted_title = recipe['title'].split(" ")
         splitted_title = [swapped_words_not_healthy[x] if x in swapped_words_not_healthy else x for x in splitted_title]
         recipe['title'] = " ".join(splitted_title)
@@ -349,6 +366,8 @@ def to_cuisine(recipe, cuisine):
     '''
     Converts a parsed recipe to a given cuisine
     '''
+    recipe = copy.deepcopy(recipe)
+
     path = './src/lib/transformations/cuisines/'
     cuisine_files = [f for f in listdir(path) if isfile(join(path, f))]
     cuisine_file = False
@@ -374,6 +393,8 @@ def cooking_method(recipe,convert_from,convert_to):
     Converts a parsed recipe from the convert_from to the convert_to
     Options are bake, fry, grill and steam 
     '''
+    recipe = copy.deepcopy(recipe)
+
     swapped_words_cook = {}
     time_coeff = {}
     temp_coeff = {}
@@ -451,8 +472,13 @@ def cooking_method(recipe,convert_from,convert_to):
                     recipe['methods']['primary_methods'][i]=convert_to
                     #print(recipe['methods']['primary_methods'][i])   
         step['ingredients'] = [swapped_words_cook[x] if x in swapped_words_cook else x for x in step['ingredients']]
+        for ing in swapped_words_cook:
+            if ing in step['raw_step']:
+                step['raw_step'] = step['raw_step'].replace(ing, swapped_words_cook[ing])
+        '''
         raw_step = step['raw_step']
         splitted_step = nltk.word_tokenize(raw_step)
         splitted_step = [swapped_words_cook[x] if x in swapped_words_cook else x for x in splitted_step]
         step['raw_step'] = " ".join(splitted_step)
+        '''
     return recipe

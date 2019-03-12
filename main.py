@@ -8,16 +8,15 @@ import json
 
 def run():
 
-    recipe_num = 46385
-    recipe_num = 23725
+    recipe_num = 228265
     recipe = f'https://www.allrecipes.com/recipe/{recipe_num}'
     raw_recipe = parse_html(recipe)
     if not raw_recipe:
         print("Invalid recipe")
         return False
     parsed_recipe = format_recipe(raw_recipe)
-    formatted_recipe = to_non_healthy(parsed_recipe)
-    formatted_recipe = to_non_vegetarian(parsed_recipe)
+    formatted_recipe = to_healthy(parsed_recipe)
+    #formatted_recipe = to_non_vegetarian(parsed_recipe)
     # formatted_recipe = to_cuisine(parsed_recipe, 'japanese')
     #print('-------------- Converting to vegetarian: -------------------')
     #formatted_recipe = to_non_healthy(parsed_recipe)
@@ -27,8 +26,8 @@ def run():
 
 
 if __name__ == '__main__':
-    #run()
-    run_cli()
+    run()
+    #run_cli()
     # change this to be any of
     # test_recipes()
     # test_random_recipe()

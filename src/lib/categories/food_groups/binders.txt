@@ -24,3 +24,8 @@ lard
 cream
 coconut milk
 gravy
+light cream
+whipping cream
+sour cream
+agar-agar
+coconut oil

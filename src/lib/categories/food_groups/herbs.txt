@@ -1,4 +1,4 @@
-angelica
+﻿angelica
 basil
 holy basil
 thai basil
@@ -198,3 +198,4 @@ red pepper flakes
 mustard seed
 italian seasoning
 gherkin
+almond extract

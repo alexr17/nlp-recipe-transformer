@@ -10,8 +10,8 @@ def test_random_recipe(debug=True):
     while not raw_recipe or raw_recipe['title'] in {'johnsonville® three cheese italian style chicken sausage skillet pizza'}:
         recipe = f'https://www.allrecipes.com/recipe/{str(min_recipe + randint(0, 250000))}'
         raw_recipe = parse_html(recipe)
-    print(f"Now loading random recipe: {recipe}")
     parsed_recipe = format_recipe(raw_recipe)
+    print(f"Loaded recipe {recipe}: {parsed_recipe['title'].title()}")
     if debug: print(json.dumps(parsed_recipe, indent=2))
     return parsed_recipe
 

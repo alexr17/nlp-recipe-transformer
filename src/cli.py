@@ -29,7 +29,7 @@ There are several options for you:
         [--cuisine | -c]
             [--mediterranean | -m] 
             [--japanese | -j]
-        [--cooking_methods | -cm]
+        [--cooking-methods | -cm]
             [-f | -s | -g | -b]
                 [-f | -s | -g | -b]
             [--fry | --steam | --bake | --grill]
@@ -149,7 +149,7 @@ def format_ingredient(ing):
         else:
             front.append(adv + desc)
             adv = ''
-    s += ','.join(front) + size + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
+    s += ', '.join(front) + (' ' + size if size else '') + (' ' if len(front) or size else '') + ing['ingredient'].title() + ' ' + ', '.join(back)
     return s
 
 def cli_transform(line, parsed_recipe):
@@ -176,7 +176,7 @@ def cli_transform(line, parsed_recipe):
     elif line[1] in {'--unhealthy', '-u'}:
         print("Recipe transformed to unhealthy")
         return to_non_healthy(parsed_recipe)
-    elif line[1] in {'--cooking_methods', '-cm'} and len(line) > 3:
+    elif line[1] in {'--cooking-methods', '-cm'} and len(line) > 3:
         method1 = line[2].replace('-', '')
         method2 = line[3].replace('-', '')
         if method1 in cooking_method_map:
